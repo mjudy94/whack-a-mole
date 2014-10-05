@@ -24,6 +24,9 @@
 		7DF4689B19E1D0810033E158 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4687619E1D0810033E158 /* UIKit.framework */; };
 		7DF468A319E1D0810033E158 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7DF468A119E1D0810033E158 /* InfoPlist.strings */; };
 		7DF468A519E1D0810033E158 /* Whack_A_MoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF468A419E1D0810033E158 /* Whack_A_MoleTests.m */; };
+		7DF468B019E1D1AB0033E158 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */; };
+		7DF468B319E1D21C0033E158 /* SpriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF468B219E1D21C0033E158 /* SpriteView.m */; };
+		7DF468BC19E204030033E158 /* DifficultySelectorScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF468BB19E204030033E158 /* DifficultySelectorScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,12 @@
 		7DF468A019E1D0810033E158 /* Whack-A-MoleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Whack-A-MoleTests-Info.plist"; sourceTree = "<group>"; };
 		7DF468A219E1D0810033E158 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7DF468A419E1D0810033E158 /* Whack_A_MoleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Whack_A_MoleTests.m; sourceTree = "<group>"; };
+		7DF468AE19E1D1AB0033E158 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
+		7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
+		7DF468B119E1D21C0033E158 /* SpriteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteView.h; sourceTree = "<group>"; };
+		7DF468B219E1D21C0033E158 /* SpriteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteView.m; sourceTree = "<group>"; };
+		7DF468BA19E204030033E158 /* DifficultySelectorScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifficultySelectorScene.h; sourceTree = "<group>"; };
+		7DF468BB19E204030033E158 /* DifficultySelectorScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DifficultySelectorScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +99,12 @@
 		7DF4686619E1D0810033E158 = {
 			isa = PBXGroup;
 			children = (
+				7DF468AE19E1D1AB0033E158 /* MainMenuScene.h */,
+				7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */,
+				7DF468BA19E204030033E158 /* DifficultySelectorScene.h */,
+				7DF468BB19E204030033E158 /* DifficultySelectorScene.m */,
+				7DF468B119E1D21C0033E158 /* SpriteView.h */,
+				7DF468B219E1D21C0033E158 /* SpriteView.m */,
 				7DF4687A19E1D0810033E158 /* Whack-A-Mole */,
 				7DF4689E19E1D0810033E158 /* Whack-A-MoleTests */,
 				7DF4687119E1D0810033E158 /* Frameworks */,
@@ -130,6 +145,7 @@
 				7DF4688D19E1D0810033E158 /* MyScene.m */,
 				7DF4688F19E1D0810033E158 /* Spaceship.png */,
 				7DF4689119E1D0810033E158 /* Images.xcassets */,
+				7DF4687C19E1D0810033E158 /* Whack-A-Mole-Info.plist */,
 				7DF4687B19E1D0810033E158 /* Supporting Files */,
 			);
 			path = "Whack-A-Mole";
@@ -138,7 +154,6 @@
 		7DF4687B19E1D0810033E158 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7DF4687C19E1D0810033E158 /* Whack-A-Mole-Info.plist */,
 				7DF4687D19E1D0810033E158 /* InfoPlist.strings */,
 				7DF4688019E1D0810033E158 /* main.m */,
 				7DF4688219E1D0810033E158 /* Whack-A-Mole-Prefix.pch */,
@@ -261,7 +276,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DF468BC19E204030033E158 /* DifficultySelectorScene.m in Sources */,
 				7DF4688E19E1D0810033E158 /* MyScene.m in Sources */,
+				7DF468B319E1D21C0033E158 /* SpriteView.m in Sources */,
+				7DF468B019E1D1AB0033E158 /* MainMenuScene.m in Sources */,
 				7DF4688B19E1D0810033E158 /* ViewController.m in Sources */,
 				7DF4688519E1D0810033E158 /* AppDelegate.m in Sources */,
 				7DF4688119E1D0810033E158 /* main.m in Sources */,
@@ -394,6 +412,7 @@
 				INFOPLIST_FILE = "Whack-A-Mole/Whack-A-Mole-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -408,6 +427,7 @@
 				INFOPLIST_FILE = "Whack-A-Mole/Whack-A-Mole-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

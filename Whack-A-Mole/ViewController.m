@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "MyScene.h"
+#import "MainMenuScene.h"
+#import <SpriteKit/Spritekit.h>
+
 
 @implementation ViewController
 
@@ -18,6 +21,7 @@
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
+    skView.showsDrawCount = YES;
     skView.showsNodeCount = YES;
     
     // Create and configure the scene.
@@ -26,6 +30,13 @@
     
     // Present the scene.
     [skView presentScene:scene];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    MainMenuScene* main = [[MainMenuScene alloc] initWithSize:CGSizeMake(768, 1024)];
+    SKView *spriteView = (SKView *) self.view;
+    [spriteView presentScene: main];
 }
 
 - (BOOL)shouldAutorotate
