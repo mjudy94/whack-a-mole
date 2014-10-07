@@ -8,13 +8,13 @@
 
 #import "DifficultySelectorScene.h"
 
-@interface DifficultySelectorScene ()
-
-@property BOOL contentCreated;
-
-@end
-
 @implementation DifficultySelectorScene
+
++ (void)setGameplayMode:(NSInteger)gameplayMode
+{
+    self.gameplayMode = gameplayMode;
+}
+
 
 - (void)didMoveToView:(SKView *)view
 {

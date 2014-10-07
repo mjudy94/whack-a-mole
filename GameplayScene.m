@@ -7,14 +7,13 @@
 //
 
 #import "GameplayScene.h"
-
-@interface GameplayScene ()
-
-@property BOOL contentCreated;
-
-@end
+#import "Hole.h"
 
 @implementation GameplayScene
+
+@synthesize gameMode;
+@synthesize gameDifficulty;
+
 
 - (void)didMoveToView:(SKView *)view
 {

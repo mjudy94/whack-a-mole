@@ -67,21 +67,22 @@
     SKNode *node = [self nodeAtPoint:touchLocation];
     
     if([node.name isEqualToString:@"classicButton"]){
-        [self chooseDifficultyScene];
+        [self chooseDifficultyScene:0];
     }
     
     if([node.name isEqualToString:@"continuousButton"]){
-        [self chooseDifficultyScene];
+        [self chooseDifficultyScene:1];
     }
     
 }
 
 //possible make it just chooseNextScene with params of the next scene name
-- (void)chooseDifficultyScene
+- (void)chooseDifficultyScene:(NSInteger)mode
 {
-    SKScene *difficultyScene = [[DifficultySelectorScene alloc] initWithSize:self.size];
+    SKScene *difficultySelectorScene = [[DifficultySelectorScene alloc] initWithSize:self.size];
     SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
-    [self.view presentScene:difficultyScene transition:doors];
+    [difficultySelectorScene setGameplayMode:mode];
+    [self.view presentScene:difficultySelectorScene transition:doors];
 }
 
 
