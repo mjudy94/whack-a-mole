@@ -28,6 +28,11 @@
 {
     NSLog(@"The game mode is: %i", [self gameMode]);
     NSLog(@"The game difficulty is: %i", [self gameDifficulty]);
+    
+    self.backgroundColor = [SKColor colorWithRed:0.0 green:0.6 blue:0.0 alpha:1.0];
+    
+    
+    
 }
 
 @end

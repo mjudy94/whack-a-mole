@@ -8,6 +8,15 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface Mole : SKSpriteNode
+@interface Mole : NSObject
+
+@property (assign, nonatomic) NSInteger column;
+@property (assign, nonatomic) NSInteger row;
+@property (assign, nonatomic) NSTimeInterval duration; //length of time that mole will be present
+@property (assign, nonatomic) SKSpriteNode *sprite;
+
+
+
+
 
 @end
