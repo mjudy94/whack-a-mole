@@ -26,7 +26,8 @@
 
 - (void)drawGame
 {
-    
+    NSLog(@"The game mode is: %i", [self gameMode]);
+    NSLog(@"The game difficulty is: %i", [self gameDifficulty]);
 }
 
 @end
