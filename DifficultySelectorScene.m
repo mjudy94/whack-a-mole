@@ -7,8 +7,11 @@
 //
 
 #import "DifficultySelectorScene.h"
+#import "GameplayScene.h"
 
 @implementation DifficultySelectorScene
+
+@synthesize gameplayMode;
 
 + (void)setGameplayMode:(NSInteger)gameplayMode
 {
@@ -71,18 +74,30 @@
     CGPoint touchLocation = [touch locationInNode:self.scene];
     SKNode *node = [self nodeAtPoint:touchLocation];
     
-    if([node.name isEqualToString:@"easyButton"]){
-        
+    if([node.name isEqualToString:@"easyButton"])
+    {
+        [self setUpGameplay:[self gameplayMode] difficultyLevel:0];
     }
     
-    if([node.name isEqualToString:@"mediumButton"]){
-        
+    if([node.name isEqualToString:@"mediumButton"])
+    {
+        [self setUpGameplay:[self gameplayMode] difficultyLevel:1];
     }
     
     if([node.name isEqualToString:@"hardButton"])
     {
-        
+        [self setUpGameplay:[self gameplayMode] difficultyLevel:2];
     }
+    
+}
+
+- (void)setUpGameplay:(NSInteger)gameMode difficultyLevel:(NSInteger)difficultyLevel
+{
+    GameplayScene *gameScene = [[GameplayScene alloc] initWithSize:self.size];
+    SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
+    [gameScene setGameMode:gameMode];
+    [gameScene setGameDifficulty:difficultyLevel];
+    [self.view presentScene:gameScene transition:doors];
     
 }
 

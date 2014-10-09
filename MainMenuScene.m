@@ -79,7 +79,7 @@
 //possible make it just chooseNextScene with params of the next scene name
 - (void)chooseDifficultyScene:(NSInteger)mode
 {
-    SKScene *difficultySelectorScene = [[DifficultySelectorScene alloc] initWithSize:self.size];
+    DifficultySelectorScene *difficultySelectorScene = [[DifficultySelectorScene alloc] initWithSize:self.size];
     SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
     [difficultySelectorScene setGameplayMode:mode];
     [self.view presentScene:difficultySelectorScene transition:doors];
