@@ -7,7 +7,6 @@
 //
 
 #import "GameplayScene.h"
-#import "Hole.h"
 
 @implementation GameplayScene
 
@@ -32,6 +31,28 @@
     self.backgroundColor = [SKColor colorWithRed:0.0 green:0.6 blue:0.0 alpha:1.0];
     
     
+    
+}
+
+- (Hole *)setupHoles
+{
+    Hole *_holeLayer = [[Hole alloc] init];
+    if(gameDifficulty == 0)
+    {
+        [_holeLayer setNumColumns:3];
+        [_holeLayer setNumRows:3];
+    }
+    else
+    {
+        [_holeLayer setNumColumns:4];
+        [_holeLayer setNumRows:4];
+    }
+    
+    return _holeLayer;
+}
+
+- (NSSet *)setupMoles
+{
     
 }
 

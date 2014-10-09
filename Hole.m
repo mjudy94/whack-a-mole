@@ -8,19 +8,24 @@
 
 #import "Hole.h"
 
-@interface Hole ()
-
-@property NSInteger numOfHoles;
-
-
-@end
-
 @implementation Hole
 
-- (void) generateHoleGrid:(NSInteger *)numOfHoles
++ (Hole *)initWithNumColumns:(NSInteger)numColumns row:(NSInteger)numRows
+{
+    Hole *_holes = [[Hole alloc]init];
+    [_holes setNumColumns:numColumns];
+    [_holes setNumRows:numRows];
+    
+    return _holes;
+}
+
++ (Mole *)moleAtColumn:(NSInteger)column row:(NSInteger)row
 {
     
+    
+    
 }
+
 
 
 @end
