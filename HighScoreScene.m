@@ -10,25 +10,17 @@
 
 @implementation HighScoreScene
 
-- (void)didMoveToView:(SKView *)view
-{
-    if (!self.contentCreated)
-    {
-        [self ];
-        self.contentCreated = YES;
-    }
-}
-
 - (SKNode *)drawClassicHighScore
 {
-    
+    SKNode *highScoreList = [SKNode alloc];
+    return highScoreList;
     
 }
 
 - (SKNode *)drawContinuousHighScore
 {
-    
-    
+    SKNode *highScoreList = [SKNode alloc];
+    return highScoreList;
 }
 
 @end
