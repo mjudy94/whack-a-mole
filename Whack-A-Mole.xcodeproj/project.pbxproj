@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D3457AC19EECA160080FB8D /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3457AB19EECA160080FB8D /* GameOverScene.m */; };
+		7D3457AF19EED1E00080FB8D /* HighScoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3457AE19EED1E00080FB8D /* HighScoreScene.m */; };
 		7D3B31BE19E48F0A00E6D815 /* Hole.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B31BD19E48F0A00E6D815 /* Hole.m */; };
 		7D3B31C119E495B800E6D815 /* Mole.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B31C019E495B800E6D815 /* Mole.m */; };
 		7D7B4C1819E37B3600C5E3AB /* GameplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */; };
@@ -20,7 +22,6 @@
 		7DF4688819E1D0810033E158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4688619E1D0810033E158 /* Main.storyboard */; };
 		7DF4688B19E1D0810033E158 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4688A19E1D0810033E158 /* ViewController.m */; };
 		7DF4688E19E1D0810033E158 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4688D19E1D0810033E158 /* MyScene.m */; };
-		7DF4689019E1D0810033E158 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4688F19E1D0810033E158 /* Spaceship.png */; };
 		7DF4689219E1D0810033E158 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4689119E1D0810033E158 /* Images.xcassets */; };
 		7DF4689919E1D0810033E158 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4689819E1D0810033E158 /* XCTest.framework */; };
 		7DF4689A19E1D0810033E158 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4687219E1D0810033E158 /* Foundation.framework */; };
@@ -42,6 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D3457AA19EECA160080FB8D /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		7D3457AB19EECA160080FB8D /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		7D3457AD19EED1E00080FB8D /* HighScoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreScene.h; sourceTree = "<group>"; };
+		7D3457AE19EED1E00080FB8D /* HighScoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreScene.m; sourceTree = "<group>"; };
 		7D3B31BC19E48F0A00E6D815 /* Hole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hole.h; sourceTree = "<group>"; };
 		7D3B31BD19E48F0A00E6D815 /* Hole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hole.m; sourceTree = "<group>"; };
 		7D3B31BF19E495B800E6D815 /* Mole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mole.h; sourceTree = "<group>"; };
@@ -64,7 +69,6 @@
 		7DF4688A19E1D0810033E158 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7DF4688C19E1D0810033E158 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
 		7DF4688D19E1D0810033E158 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		7DF4688F19E1D0810033E158 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		7DF4689119E1D0810033E158 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7DF4689719E1D0810033E158 /* Whack-A-MoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Whack-A-MoleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DF4689819E1D0810033E158 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -107,8 +111,12 @@
 			children = (
 				7DF468AE19E1D1AB0033E158 /* MainMenuScene.h */,
 				7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */,
+				7D3457AD19EED1E00080FB8D /* HighScoreScene.h */,
+				7D3457AE19EED1E00080FB8D /* HighScoreScene.m */,
 				7D7B4C1619E37B3600C5E3AB /* GameplayScene.h */,
 				7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */,
+				7D3457AA19EECA160080FB8D /* GameOverScene.h */,
+				7D3457AB19EECA160080FB8D /* GameOverScene.m */,
 				7DF468BA19E204030033E158 /* DifficultySelectorScene.h */,
 				7DF468BB19E204030033E158 /* DifficultySelectorScene.m */,
 				7D3B31BC19E48F0A00E6D815 /* Hole.h */,
@@ -153,7 +161,6 @@
 				7DF4688A19E1D0810033E158 /* ViewController.m */,
 				7DF4688C19E1D0810033E158 /* MyScene.h */,
 				7DF4688D19E1D0810033E158 /* MyScene.m */,
-				7DF4688F19E1D0810033E158 /* Spaceship.png */,
 				7DF4689119E1D0810033E158 /* Images.xcassets */,
 				7DF4687C19E1D0810033E158 /* Whack-A-Mole-Info.plist */,
 				7DF4687B19E1D0810033E158 /* Supporting Files */,
@@ -266,7 +273,6 @@
 			files = (
 				7DF4687F19E1D0810033E158 /* InfoPlist.strings in Resources */,
 				7DF4689219E1D0810033E158 /* Images.xcassets in Resources */,
-				7DF4689019E1D0810033E158 /* Spaceship.png in Resources */,
 				7DF4688819E1D0810033E158 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D3457AC19EECA160080FB8D /* GameOverScene.m in Sources */,
 				7D7B4C1819E37B3600C5E3AB /* GameplayScene.m in Sources */,
 				7D3B31BE19E48F0A00E6D815 /* Hole.m in Sources */,
 				7DF468BC19E204030033E158 /* DifficultySelectorScene.m in Sources */,
@@ -295,6 +302,7 @@
 				7DF4688B19E1D0810033E158 /* ViewController.m in Sources */,
 				7DF4688519E1D0810033E158 /* AppDelegate.m in Sources */,
 				7DF4688119E1D0810033E158 /* main.m in Sources */,
+				7D3457AF19EED1E00080FB8D /* HighScoreScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
