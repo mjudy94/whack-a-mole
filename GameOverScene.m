@@ -37,8 +37,14 @@
     score.text = [NSString stringWithFormat:@"%d", [self userScore]];
     [self addChild:score];
     
-    [[HighScoreScene alloc] initWithSize:];
-    [self addChild: []]
+    HighScoreScene *highScore = [[HighScoreScene alloc] initWithSize:CGSizeMake(self.frame.size.width, self.frame.size.height*.5)];
+    if (gameMode == 0)
+    {
+        [self addChild:[highScore drawClassicHighScore]];
+    } else if (gameMode == 1)
+    {
+        [self addChild:[highScore drawContinuousHighScore]];
+    }
 }
 
 

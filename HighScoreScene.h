@@ -12,4 +12,7 @@
 
 @property BOOL contentCreated;
 
+- (SKNode *)drawClassicHighScore;
+- (SKNode *)drawContinuousHighScore;
+
 @end
