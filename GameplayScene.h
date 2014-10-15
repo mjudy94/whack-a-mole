@@ -18,7 +18,5 @@
 @property (nonatomic, assign)NSInteger userScore;
 @property BOOL contentCreated;
 
--(Hole *)setupHoles;
--(NSSet *)setupMoles; //show and hide mole methods are in Mole class
 
 @end

@@ -19,12 +19,12 @@
     return _holes;
 }
 
-+ (Mole *)moleAtColumn:(NSInteger)column row:(NSInteger)row
-{
+//+ (Mole *)moleAtColumn:(NSInteger)column row:(NSInteger)row
+//{
     
     
     
-}
+//}
 
 
 
