@@ -30,12 +30,30 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
 //I basically run most of the code from here but Im going to to devide the code into different methods
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        
+        //layer for the background(necessary?)
+        self.bgLayer = [SKSpriteNode spriteNodeWithImageNamed:@"grass.png"];
+        [self.bgLayer setScale:0.8];
+        self.bgLayer.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        [self addChild:self.bgLayer];
+        
+        //layer for the game, the grass/holes
+        self.gameLayer = [SKNode node];
+        [self.bgLayer addChild:self.gameLayer];
+        
+        //layer for the moles
+        self.moleLayer = [SKNode node];
+        [self.gameLayer addChild:self.moleLayer];
+        
+        
+        
         //I use a background png file set it to that
-        self.backgroundColor = [SKColor whiteColor];
-        SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"grass.png"];
-        [bgImage setScale:0.6];
-        bgImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        [self addChild:bgImage];
+        //self.backgroundColor = [SKColor whiteColor];
+        //SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"grass.png"];
+        //[bgImage setScale:0.6];
+        //bgImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        //[self addChild:bgImage];
+        
         //Initializes the atlas (collection of pictures)
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
         //makes temp array to hold the textures from the atlas

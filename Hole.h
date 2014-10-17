@@ -15,8 +15,8 @@
 @property (assign, nonatomic) NSInteger numColumns;
 
 
-+ (Hole *)initWithNumColumns:(NSInteger)column row:(NSInteger)row;
-+ (Mole *)moleAtColumn:(NSInteger)column row:(NSInteger)row; //needs to return mole because may need to remove mole object if it's been tapped
++ (NSMutableArray *)initWithNumColumns:(NSInteger)column row:(NSInteger)row;
++ (NSMutableArray *)createMolesAtColumn:(NSInteger)column row:(NSInteger)row;
 
 
 @end
