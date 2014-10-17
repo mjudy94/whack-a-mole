@@ -16,8 +16,4 @@
 @property (assign, nonatomic) NSTimeInterval duration; //length of time that mole will be present
 @property (assign, nonatomic) SKSpriteNode *sprite;
 
--(void)showMole;
--(void)hideMole;
-
-
 @end

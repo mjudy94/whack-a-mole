@@ -32,18 +32,28 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
     if (self = [super initWithSize:size]) {
         
         //layer for the background(necessary?)
-        self.bgLayer = [SKSpriteNode spriteNodeWithImageNamed:@"grass.png"];
-        [self.bgLayer setScale:0.8];
+        self.bgLayer = [SKSpriteNode node];
         self.bgLayer.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:self.bgLayer];
         
-        //layer for the game, the grass/holes
-        self.gameLayer = [SKNode node];
+        //layer for the top half of the grass.
+        self.gameLayer = [SKSpriteNode node];
         [self.bgLayer addChild:self.gameLayer];
         
-        //layer for the moles
-        self.moleLayer = [SKNode node];
+        //layer for the bottome grass/holes
+        self.moleLayer = [SKSpriteNode node];
         [self.gameLayer addChild:self.moleLayer];
+        
+        
+        //initializes array of mole objects
+        if(self.gameDifficulty == 0)
+        {
+            NSMutableArray *moles = [Hole initWithNumColumns:3 row:3];
+        }
+        else //not easy, must be medium or hard
+        {
+            NSMutableArray *moles = [Hole initWithNumColumns:4 row:4];
+        }
         
         
         
@@ -89,9 +99,9 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
                                       timePerFrame:0.1f resize:YES restore:YES] withKey:@"walkingInPlaceBear"];
     return;
 }
--(void)addMole
+-(void)addMole:(NSMutableArray *)moles
 {
-    // [self addChild:mole];
+    
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //Called when a touch begins
