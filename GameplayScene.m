@@ -8,6 +8,8 @@
 
 #import "GameplayScene.h"
 
+const float moleHoleOffset = 75.0;
+
 @implementation GameplayScene
 
 @synthesize gameMode;
@@ -100,16 +102,16 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
     for (int i = 0; i < numRows; i++)
     {
         SKSpriteNode *bgUpper = [SKSpriteNode spriteNodeWithImageNamed:@"bgUpper.png"];
-        bgUpper.anchorPoint = CGPointMake(0.5, 0.0); //calculate based on iteration through loop
-        bgUpper.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * 0.2 * i+1);//calculate based on iteration through loop
+        bgUpper.anchorPoint = CGPointMake(0.5, -1.0); //calculate based on iteration through loop
+        bgUpper.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*(0.15-(i * 0.2)));//calculate based on iteration through loop
         bgUpper.zPosition = 0;
-        [self addChild:bgUpper];
+        [self.bgLayer addChild:bgUpper];
         
         SKSpriteNode *bgLower = [SKSpriteNode spriteNodeWithImageNamed:@"bgLower.png"];
-        bgLower.anchorPoint = CGPointMake(0.5, 0.95);
-        bgLower.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * -0.2 * i); //some method based on iteration through a loop
+        bgLower.anchorPoint = CGPointMake(0.5, -1.0);
+        bgLower.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*(0.07-(i * 0.2)));//some method based on iteration through a loop
         bgLower.zPosition = 2;
-        [self addChild:bgLower];
+        [self.bgLayer addChild:bgLower];
     }
 }
 
