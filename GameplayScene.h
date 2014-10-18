@@ -21,8 +21,7 @@ static const CGFloat HoleHeight = 0;
 @property (nonatomic, assign)NSInteger userScore;
 
 @property(strong, nonatomic) SKNode *bgLayer;
-@property(strong, nonatomic) SKNode *gameLayer;
-@property(strong, nonatomic) SKNode *moleLayer;
+@property (strong, nonatomic) SKTexture *moleTexture;
 
 @property BOOL contentCreated;
 

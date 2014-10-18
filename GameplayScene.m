@@ -8,8 +8,6 @@
 
 #import "GameplayScene.h"
 
-const float moleHoleOffset = 75.0;
-
 @implementation GameplayScene
 
 @synthesize gameMode;
@@ -53,12 +51,11 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
         {
             NSMutableArray *moles = [Hole initWithNumColumns:3 row:4];
         }
-        
-        NSLog(@"about to draw game layer for difficulty level");
-        [self drawGameLayerForDifficultyLevel];
+
         
         //Initializes the atlas (collection of pictures)
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
+        self.moleTexture = [moleAnimatedAtlas textureNamed:@"mole_1.png"];
         //makes temp array to hold the textures from the atlas
         NSMutableArray *moleFrames = [NSMutableArray array];
         //makes the pictures from the atlas into texture objects
@@ -76,12 +73,13 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
         //adds all the textures to the NSArray
         _moleFramesArray = moleFrames;
         //Made a temp texture so the mole node starts off with the first picture in the array
-        SKTexture *temp = _moleFramesArray[0];
-        _mole = [SKSpriteNode spriteNodeWithTexture:temp];
+        //SKTexture *temp = _moleFramesArray[0];
+        //_mole = [SKSpriteNode spriteNodeWithTexture:temp];
         //position of the mole, will change once we add more
-        _mole.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        [self addChild:_mole];
-        // [self addMole];
+        //_mole.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        
+        
+        [self drawGameLayerForDifficultyLevel];
     }
     return self;
 }
@@ -106,6 +104,19 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
         bgUpper.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*(0.15-(i * 0.2)));//calculate based on iteration through loop
         bgUpper.zPosition = 0;
         [self.bgLayer addChild:bgUpper];
+        
+        float moleOffset = -220.0;
+        
+        for (int j = 0; j < 3; j++)
+        {
+            SKSpriteNode *mole = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
+            mole.position = CGPointMake(CGRectGetMidX(self.frame) + moleOffset, self.frame.size.height*(0.25-(i * 0.2)));
+            //self.frame.size.height*(0.25-(i * 0.2)) is roughly the starting height for hidden moles
+            mole.zPosition = 5;
+            moleOffset += 220;
+            [self.bgLayer addChild:mole];
+                                                            
+        }
         
         SKSpriteNode *bgLower = [SKSpriteNode spriteNodeWithImageNamed:@"bgLower.png"];
         bgLower.anchorPoint = CGPointMake(0.5, -1.0);
