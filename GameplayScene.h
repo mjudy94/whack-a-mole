@@ -20,14 +20,13 @@ static const CGFloat HoleHeight = 0;
 @property (nonatomic, assign)NSInteger gameDifficulty; //Easy: 0, Medium: 1, Hard: 2
 @property (nonatomic, assign)NSInteger userScore;
 
-
 @property(strong, nonatomic) SKNode *bgLayer;
 @property(strong, nonatomic) SKNode *gameLayer;
 @property(strong, nonatomic) SKNode *moleLayer;
 
-
-
 @property BOOL contentCreated;
 
+
+-(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel;
 
 @end

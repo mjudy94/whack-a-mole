@@ -28,22 +28,19 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
 }
 
 //I basically run most of the code from here but Im going to to devide the code into different methods
--(id)initWithSize:(CGSize)size {
+-(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel {
+    
     if (self = [super initWithSize:size]) {
         
-        //layer for the background(necessary?)
-        self.bgLayer = [SKSpriteNode node];
-        self.bgLayer.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        [self setGameDifficulty:difficultyLevel];
+        
+        self.anchorPoint = CGPointMake(0.5, 0.5);
+        self.bgLayer = [SKNode node];
         [self addChild:self.bgLayer];
-        
-        //layer for the top half of the grass.
-        self.gameLayer = [SKSpriteNode node];
-        [self.bgLayer addChild:self.gameLayer];
-        
-        //layer for the bottome grass/holes
-        self.moleLayer = [SKSpriteNode node];
-        [self.gameLayer addChild:self.moleLayer];
-        
+        SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"bgColor.png"];
+        [bg setScale:1.2];
+        [bg setZPosition:0];
+        [self.bgLayer addChild:bg];
         
         //initializes array of mole objects
         if(self.gameDifficulty == 0)
@@ -52,17 +49,11 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
         }
         else //not easy, must be medium or hard
         {
-            NSMutableArray *moles = [Hole initWithNumColumns:4 row:4];
+            NSMutableArray *moles = [Hole initWithNumColumns:3 row:4];
         }
         
-        
-        
-        //I use a background png file set it to that
-        //self.backgroundColor = [SKColor whiteColor];
-        //SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"grass.png"];
-        //[bgImage setScale:0.6];
-        //bgImage.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        //[self addChild:bgImage];
+        NSLog(@"about to draw game layer for difficulty level");
+        [self drawGameLayerForDifficultyLevel];
         
         //Initializes the atlas (collection of pictures)
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
@@ -92,6 +83,36 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
     }
     return self;
 }
+
+-(void)drawGameLayerForDifficultyLevel
+{
+    NSLog(@"%ld", (long)self.gameDifficulty);
+    int numRows;
+    
+    if (self.gameDifficulty == 0)
+    {
+        numRows = 3;
+    } else
+    {
+        numRows = 4;
+    }
+    NSLog(@"%ld", (long)numRows);
+    for (int i = 0; i < numRows; i++)
+    {
+        SKSpriteNode *bgUpper = [SKSpriteNode spriteNodeWithImageNamed:@"bgUpper.png"];
+        bgUpper.anchorPoint = CGPointMake(0.5, 0.0); //calculate based on iteration through loop
+        bgUpper.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * 0.2 * i+1);//calculate based on iteration through loop
+        bgUpper.zPosition = 0;
+        [self addChild:bgUpper];
+        
+        SKSpriteNode *bgLower = [SKSpriteNode spriteNodeWithImageNamed:@"bgLower.png"];
+        bgLower.anchorPoint = CGPointMake(0.5, 0.95);
+        bgLower.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height * -0.2 * i); //some method based on iteration through a loop
+        bgLower.zPosition = 2;
+        [self addChild:bgLower];
+    }
+}
+
 -(void)moleAnimate
 {
     //This is our general runAction method to make our mole animatiom.
@@ -99,10 +120,7 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
                                       timePerFrame:0.1f resize:YES restore:YES] withKey:@"walkingInPlaceBear"];
     return;
 }
--(void)addMole:(NSMutableArray *)moles
-{
-    
-}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //Called when a touch begins
     [self moleAnimate];
