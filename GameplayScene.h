@@ -7,7 +7,6 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "Hole.h"
 #import "Mole.h"
 #import "GameOverScene.h"
 

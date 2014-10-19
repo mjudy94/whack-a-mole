@@ -14,5 +14,6 @@
 @synthesize row;
 @synthesize isVisible;
 @synthesize duration;
+@synthesize index;
 
 @end

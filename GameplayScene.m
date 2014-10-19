@@ -105,6 +105,8 @@ SKSpriteNode *_mole;
             mole.zPosition = 1;
             moleOffset += 220;
             mole.userData = [[NSMutableDictionary alloc] init];
+            mole.name = [NSString stringWithFormat:@"%d",(ij)];
+            NSLog(@"%@", mole.name);
             [self.bgLayer addChild:mole];
             [self.moles addObject:mole];
            
@@ -128,6 +130,10 @@ SKSpriteNode *_mole;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //Called when a touch begins
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint touchLocation = [touch locationInNode:self.scene];
+    SKNode *node = [self nodeAtPoint:touchLocation];
     
     //plays noise when touched
     [self runAction:[SKAction playSoundFileNamed:@"OUCH.mp3" waitForCompletion:NO]];
