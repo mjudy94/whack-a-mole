@@ -10,4 +10,9 @@
 
 @implementation Mole
 
+@synthesize column;
+@synthesize row;
+@synthesize isVisible;
+@synthesize duration;
+
 @end

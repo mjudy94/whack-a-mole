@@ -16,8 +16,8 @@
 
 SKSpriteNode *mole;//havent used yet
 SKAction *moleAnimation;//the mole animation action called in the touchesBegan method
-SKSpriteNode *_mole;//The mole sprite that, might need to add more or make an array of these in the future
 NSArray *_moleFramesArray;//An array of textures to run the animation
+SKSpriteNode *_mole;
 
 - (void)didMoveToView:(SKView *)view
 {
@@ -31,7 +31,7 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
 -(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel {
     
     if (self = [super initWithSize:size]) {
-        
+        [self setGameOver:false];
         [self setGameDifficulty:difficultyLevel];
         
         self.anchorPoint = CGPointMake(0.5, 0.5);
@@ -41,17 +41,6 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
         [bg setScale:1.2];
         [bg setZPosition:0];
         [self.bgLayer addChild:bg];
-        
-        //initializes array of mole objects
-        if(self.gameDifficulty == 0)
-        {
-            NSMutableArray *moles = [Hole initWithNumColumns:3 row:3];
-        }
-        else //not easy, must be medium or hard
-        {
-            NSMutableArray *moles = [Hole initWithNumColumns:3 row:4];
-        }
-
         
         //Initializes the atlas (collection of pictures)
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
@@ -86,7 +75,6 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
 
 -(void)drawGameLayerForDifficultyLevel
 {
-    NSLog(@"%ld", (long)self.gameDifficulty);
     int numRows;
     
     if (self.gameDifficulty == 0)
@@ -96,7 +84,8 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
     {
         numRows = 4;
     }
-    NSLog(@"%ld", (long)numRows);
+    
+    self.moles = [[NSMutableArray alloc] init];
     for (int i = 0; i < numRows; i++)
     {
         SKSpriteNode *bgUpper = [SKSpriteNode spriteNodeWithImageNamed:@"bgUpper.png"];
@@ -110,14 +99,17 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
         for (int j = 0; j < 3; j++)
         {
             SKSpriteNode *mole = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
-            mole.position = CGPointMake(CGRectGetMidX(self.frame) + moleOffset, self.frame.size.height*(0.25-(i * 0.2)));
-            //self.frame.size.height*(0.25-(i * 0.2)) is roughly the starting height for hidden moles
-            mole.zPosition = 5;
+            mole.position = CGPointMake(CGRectGetMidX(self.frame) + moleOffset, self.frame.size.height*(0.23-(i * 0.2)));
+            // is roughly the height for popped moles
+            //self.frame.size.height*(0.32-(i * 0.2)));
+            mole.zPosition = 1;
             moleOffset += 220;
+            mole.userData = [[NSMutableDictionary alloc] init];
             [self.bgLayer addChild:mole];
+            [self.moles addObject:mole];
+           
                                                             
         }
-        
         SKSpriteNode *bgLower = [SKSpriteNode spriteNodeWithImageNamed:@"bgLower.png"];
         bgLower.anchorPoint = CGPointMake(0.5, -1.0);
         bgLower.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*(0.07-(i * 0.2)));//some method based on iteration through a loop
@@ -126,7 +118,7 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
     }
 }
 
--(void)moleAnimate
+-(void)animateMole:(Mole *)mole
 {
     //This is our general runAction method to make our mole animatiom.
     [_mole runAction:[SKAction animateWithTextures:_moleFramesArray
@@ -136,12 +128,37 @@ NSArray *_moleFramesArray;//An array of textures to run the animation
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //Called when a touch begins
-    [self moleAnimate];
+    
     //plays noise when touched
     [self runAction:[SKAction playSoundFileNamed:@"OUCH.mp3" waitForCompletion:NO]];
 }
 -(void)update:(CFTimeInterval)currentTime {
+    
     /* Called before each frame is rendered */
+    for (SKSpriteNode *mole in self.moles)
+    {
+        if(arc4random() % 16 == 0)
+        {
+            if (!mole.hasActions)
+            {
+                [self moleActions:mole];
+            }
+        }
+    }
+}
+
+- (void)moleActions:(SKSpriteNode *)mole
+{
+    
+    SKAction *popUp = [SKAction moveToY:mole.position.y + mole.size.height duration:0.2f]; //pop the mole but do it over a span of .2 seconds
+    popUp.timingMode = SKActionTimingEaseInEaseOut; //makes the animation smoother
+    SKAction *hideMole = [SKAction moveToY:mole.position.y duration:0.2f];//
+    hideMole.timingMode = SKActionTimingEaseInEaseOut;
+    SKAction *pause = [SKAction waitForDuration:0.5f];
+    
+    //Creates the sequence of actions to create mole antics where the mole pops up then goes back into his hole
+    SKAction *moleAntics = [SKAction sequence:@[popUp, pause, hideMole]];
+    [mole runAction:moleAntics];
 }
 
 @end
