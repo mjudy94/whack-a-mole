@@ -34,7 +34,7 @@
     //Displaying last user score
     SKLabelNode *score = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
     score.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.75);
-    score.text = [NSString stringWithFormat:@"%d", [self userScore]];
+    score.text = [NSString stringWithFormat:@"%ld", (long)[self userScore]];
     [self addChild:score];
     
     HighScoreScene *highScore = [[HighScoreScene alloc] initWithSize:CGSizeMake(self.frame.size.width, self.frame.size.height*.5)];
