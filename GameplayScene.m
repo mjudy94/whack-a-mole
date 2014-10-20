@@ -90,7 +90,8 @@ SKSpriteNode *_mole;
     
     //self.moles = [[NSMutableArray alloc] init];
     self.grid = [[Grid alloc] init];
-    self.moles = [self.grid addInitialMolesWithRows:numRows];
+    [self setMoles:[self.grid addInitialMolesWithRows:numRows]];
+    //self.moles = [self.grid addInitialMolesWithRows:numRows];
     [self.grid setNumRows:numRows];
     [self.grid setNumColumns:3];
     

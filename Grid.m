@@ -26,15 +26,22 @@ Mole *_moles[3][4];
 
 -(NSSet *)addInitialMolesWithRows:(NSInteger)rows
 {
-    NSMutableSet *set = [NSMutableSet set];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
     
-    for (NSInteger row; row < rows; row++)
+    NSLog(@"%ld", (long)rows);
+    for (NSInteger row = 0; row < rows; row++)
     {
-        for(NSInteger column; column < 3; column++)
+        for(NSInteger column = 0; column < 3; column++)
         {
-            Mole *mole = [self addMoleAtColumn:column atRow:row];
+            //Mole *mole = [self addMoleAtColumn:column atRow:row];
+            Mole *mole = [[Mole alloc] init];
+            mole.column = column;
+            mole.row = row;
+            mole.isVisible = false;
+            _moles[row][column] = mole;
             [set addObject:mole];
         }
+        NSLog(@"%lu", [set count]);
     }
     return set;
 }
