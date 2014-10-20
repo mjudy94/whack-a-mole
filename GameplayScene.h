@@ -23,13 +23,14 @@ static const CGFloat HoleHeight = 0;
 
 @property(strong, nonatomic) SKNode *bgLayer;
 @property (strong, nonatomic) SKTexture *moleTexture;
-@property (strong, nonatomic) NSMutableArray *moles;
+//@property (strong, nonatomic) NSMutableArray *moles;
+@property (strong, nonatomic) NSSet *moles;
 @property (strong, nonatomic) Grid *grid;
 
 @property BOOL contentCreated;
 
 
 -(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel;
--(void)addSpritesForMoles:(NSSet *)moles;
+-(void)addSpritesForMoles;
 
 @end

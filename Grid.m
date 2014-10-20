@@ -10,29 +10,23 @@
 
 @implementation Grid
 
-@synthesize moles;
+Mole *_moles[3][4];
+
+//@synthesize moles;
 @synthesize numRows;
 @synthesize numColumns;
 @synthesize moleTexture;
 
 - (id)initWithNumRows:(NSInteger)row
 {
-    self.moles = [[NSMutableArray alloc]initWithCapacity:3];
     
-    for (int i = 0; i < 3; i++)
-    {
-        NSMutableArray *moleColumn = [[NSMutableArray alloc] initWithCapacity:row];
-        [self.moles insertObject:moleColumn atIndex:i];
-    }
-    
+    self = [super init];
     return self;
 }
 
 -(NSSet *)addInitialMolesWithRows:(NSInteger)rows
 {
     NSMutableSet *set = [NSMutableSet set];
-    
-    Mole *_moles[3][rows];
     
     for (NSInteger row; row < rows; row++)
     {
@@ -50,19 +44,14 @@
     Mole *mole = [[Mole alloc] init];
     mole.column = colNum;
     mole.row = rowNum;
-    self.moles[rowNum][colNum] = mole;
+    mole.isVisible = false;
+    _moles[rowNum][colNum] = mole;
     return mole;
-}
-
-- (void)setSprite:(SKSpriteNode *)node forMoleInRow:(NSInteger)row inColumn:(NSInteger)column
-{
-    Mole *mole = self.moles[row][column];
-    [mole setSprite:node];
 }
 
 - (Mole *)moleAtRow:(NSInteger)rowNum column:(NSInteger)colNum
 {
-    return self.moles[rowNum][colNum];
+    return _moles[rowNum][colNum];
 }
 
 - (Mole *)findSprite:(SKNode *)node
@@ -76,7 +65,7 @@
         for(int j = 0; j < self.numRows; j++)
         {
             NSLog(@"In find sprite");
-            Mole *mole = self.moles[i][j];
+            Mole *mole = [self moleAtRow:numRows column:numColumns];
             if([mole.sprite isEqual:(SKSpriteNode *)node])
             {
                 return mole;

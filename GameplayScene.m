@@ -13,7 +13,7 @@
 @synthesize gameMode;
 @synthesize gameDifficulty;
 @synthesize grid;
-@synthesize moles;
+//@synthesize moles;
 @synthesize userScore;
 @synthesize gameOver;
 
@@ -88,8 +88,9 @@ SKSpriteNode *_mole;
         numRows = 4;
     }
     
-    self.moles = [[NSMutableArray alloc] init];
-    self.grid = [[Grid alloc] initWithNumRows:numRows];
+    //self.moles = [[NSMutableArray alloc] init];
+    self.grid = [[Grid alloc] init];
+    self.moles = [self.grid addInitialMolesWithRows:numRows];
     [self.grid setNumRows:numRows];
     [self.grid setNumColumns:3];
     
@@ -101,37 +102,64 @@ SKSpriteNode *_mole;
         bgUpper.zPosition = 0;
         [self.bgLayer addChild:bgUpper];
         
-        float moleOffset = -220.0;
+        //float moleOffset = -220.0;
         
-        for (int j = 0; j < 3; j++)
-        {
-            Mole *mole = [self.grid addMoleAtColumn:i atRow:j];
-            SKSpriteNode *moleSprite = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
-            moleSprite.position = CGPointMake(CGRectGetMidX(self.frame) + moleOffset, self.frame.size.height*(0.23-(i * 0.2)));
+        
+        //for (int j = 0; j < 3; j++)
+        //{
+            
+            //Mole *mole = [self.grid addMoleAtColumn:i atRow:j];
+            //SKSpriteNode *moleSprite = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
+            //moleSprite.position = CGPointMake(CGRectGetMidX(self.frame) + moleOffset, self.frame.size.height*(0.23-(i * 0.2)));
             // is roughly the height for popped moles
             //self.frame.size.height*(0.32-(i * 0.2)));
-            moleSprite.zPosition = 5;
-            moleOffset += 220;
-            moleSprite.name = @"mole";
-            mole.sprite = moleSprite;
-            [self.grid setSprite:moleSprite forMoleInRow:i inColumn:j];
+            //moleSprite.zPosition = 5;
+            //moleOffset += 220;
+            //moleSprite.name = @"mole";
+            //mole.sprite = moleSprite;
+            //[self.grid setSprite:moleSprite forMoleInRow:i inColumn:j];
             //NSLog(@"%@", mole.name);
             
-            [self.bgLayer addChild:moleSprite];
-            [self.moles addObject:moleSprite];
+            //[self.bgLayer addChild:moleSprite];
+            //[self.moles addObject:moleSprite];
                                                             
-        }
+        //}
+        
         SKSpriteNode *bgLower = [SKSpriteNode spriteNodeWithImageNamed:@"bgLower.png"];
         bgLower.anchorPoint = CGPointMake(0.5, -1.0);
         bgLower.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height*(0.07-(i * 0.2)));//some method based on iteration through a loop
         bgLower.zPosition = 2;
         [self.bgLayer addChild:bgLower];
     }
+    [self addSpritesForMoles];
 }
 
--(void)addSpritesForMoles:(NSSet *)moles
+-(void)addSpritesForMoles
 {
-    
+    NSLog(@"In add sprites for moles");
+    for (Mole *mole in self.moles)
+    {
+        NSLog(@"Adding a mole sprite");
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
+        int moleOffset;
+        if (mole.column % 3 == 0)
+        {
+            moleOffset = 220;
+        }
+        else if (mole.column % 3 == 1)
+        {
+            moleOffset = 0;
+        }
+        else
+        {
+            moleOffset = -220;
+        }
+        sprite.position = CGPointMake(CGRectGetMidX(self.frame)+ moleOffset, self.frame.size.height*(0.23-(mole.row * 0.2)));
+        sprite.zPosition = 7;
+        sprite.name = @"mole";
+        [self.bgLayer addChild:sprite];
+        mole.sprite = sprite;
+    }
 }
 
 -(void)animateMole:(Mole *)mole
@@ -193,7 +221,7 @@ SKSpriteNode *_mole;
 
 - (void)moleActions:(SKSpriteNode *)moleSprite
 {
-    NSLog(@"should pop mole");
+    //NSLog(@"should pop mole");
     //SKSpriteNode *mole = [self.grid moleSpriteAtRow:1 column:1];
     SKAction *popUp = [SKAction moveToY:moleSprite.position.y + moleSprite.size.height duration:0.2f]; //pop the mole but do it over a span of .2 seconds
     popUp.timingMode = SKActionTimingEaseInEaseOut; //makes the animation smoother
