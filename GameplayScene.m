@@ -89,7 +89,7 @@ SKSpriteNode *_mole;
     }
     
     self.moles = [[NSMutableArray alloc] init];
-    self.grid = [[Grid alloc] init];
+    self.grid = [[Grid alloc] initWithNumRows:numRows];
     [self.grid setNumRows:numRows];
     [self.grid setNumColumns:3];
     
@@ -105,7 +105,6 @@ SKSpriteNode *_mole;
         
         for (int j = 0; j < 3; j++)
         {
-            
             Mole *mole = [self.grid addMoleAtColumn:i atRow:j];
             SKSpriteNode *moleSprite = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
             moleSprite.position = CGPointMake(CGRectGetMidX(self.frame) + moleOffset, self.frame.size.height*(0.23-(i * 0.2)));
@@ -114,10 +113,11 @@ SKSpriteNode *_mole;
             moleSprite.zPosition = 5;
             moleOffset += 220;
             moleSprite.name = @"mole";
-            //[self.grid setSprite:moleSprite forMoleInColumn:i inRow:j];
+            mole.sprite = moleSprite;
+            [self.grid setSprite:moleSprite forMoleInRow:i inColumn:j];
             //NSLog(@"%@", mole.name);
             
-            [self.bgLayer addChild:mole.sprite];
+            [self.bgLayer addChild:moleSprite];
             [self.moles addObject:moleSprite];
                                                             
         }
@@ -127,6 +127,11 @@ SKSpriteNode *_mole;
         bgLower.zPosition = 2;
         [self.bgLayer addChild:bgLower];
     }
+}
+
+-(void)addSpritesForMoles:(NSSet *)moles
+{
+    
 }
 
 -(void)animateMole:(Mole *)mole
@@ -147,8 +152,8 @@ SKSpriteNode *_mole;
     if ([node.name isEqualToString:@"mole"])
     {
         NSLog(@"inside if statement for touchesBegan");
-        Mole *hitMole = [self.grid findSprite:node];
-        
+        SKSpriteNode *hitMole = (SKSpriteNode *)node;
+        //need to still grab that mole sprites object to set it to isVisible = false
     }
     
     //plays noise when touched

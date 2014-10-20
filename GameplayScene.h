@@ -30,5 +30,6 @@ static const CGFloat HoleHeight = 0;
 
 
 -(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel;
+-(void)addSpritesForMoles:(NSSet *)moles;
 
 @end

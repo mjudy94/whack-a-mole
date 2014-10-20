@@ -28,10 +28,28 @@
     return self;
 }
 
+-(NSSet *)addInitialMolesWithRows:(NSInteger)rows
+{
+    NSMutableSet *set = [NSMutableSet set];
+    
+    Mole *_moles[3][rows];
+    
+    for (NSInteger row; row < rows; row++)
+    {
+        for(NSInteger column; column < 3; column++)
+        {
+            Mole *mole = [self addMoleAtColumn:column atRow:row];
+            [set addObject:mole];
+        }
+    }
+    return set;
+}
+
 - (Mole *)addMoleAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum
 {
-    SKSpriteNode *moleSprite = [[SKSpriteNode alloc] initWithTexture:self.moleTexture];
-    Mole *mole = [[Mole alloc] initAtColumn:colNum atRow:rowNum withSprite:moleSprite];
+    Mole *mole = [[Mole alloc] init];
+    mole.column = colNum;
+    mole.row = rowNum;
     self.moles[rowNum][colNum] = mole;
     return mole;
 }
