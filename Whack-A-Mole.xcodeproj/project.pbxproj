@@ -17,6 +17,7 @@
 		7D7B4C1819E37B3600C5E3AB /* GameplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */; };
 		7D82F16E19F094410022682C /* MoleAnimation.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7D82F16C19F094410022682C /* MoleAnimation.atlas */; };
 		7D82F16F19F094410022682C /* OUCH.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D82F16D19F094410022682C /* OUCH.mp3 */; };
+		7D872B2F19F475A80060D2BE /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D872B2E19F475A80060D2BE /* Grid.m */; };
 		7DF4687319E1D0810033E158 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4687219E1D0810033E158 /* Foundation.framework */; };
 		7DF4687519E1D0810033E158 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4687419E1D0810033E158 /* CoreGraphics.framework */; };
 		7DF4687719E1D0810033E158 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4687619E1D0810033E158 /* UIKit.framework */; };
@@ -62,6 +63,8 @@
 		7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameplayScene.m; sourceTree = "<group>"; };
 		7D82F16C19F094410022682C /* MoleAnimation.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = MoleAnimation.atlas; sourceTree = "<group>"; };
 		7D82F16D19F094410022682C /* OUCH.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = OUCH.mp3; sourceTree = "<group>"; };
+		7D872B2D19F475A80060D2BE /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		7D872B2E19F475A80060D2BE /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
 		7DF4686F19E1D0810033E158 /* Whack-A-Mole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Whack-A-Mole.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DF4687219E1D0810033E158 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7DF4687419E1D0810033E158 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -143,6 +146,8 @@
 				7DF468BB19E204030033E158 /* DifficultySelectorScene.m */,
 				7D3B31BF19E495B800E6D815 /* Mole.h */,
 				7D3B31C019E495B800E6D815 /* Mole.m */,
+				7D872B2D19F475A80060D2BE /* Grid.h */,
+				7D872B2E19F475A80060D2BE /* Grid.m */,
 				7DF4687A19E1D0810033E158 /* Whack-A-Mole */,
 				7DF4689E19E1D0810033E158 /* Whack-A-MoleTests */,
 				7DF4687119E1D0810033E158 /* Frameworks */,
@@ -321,6 +326,7 @@
 			files = (
 				7D3457AC19EECA160080FB8D /* GameOverScene.m in Sources */,
 				7D7B4C1819E37B3600C5E3AB /* GameplayScene.m in Sources */,
+				7D872B2F19F475A80060D2BE /* Grid.m in Sources */,
 				7DF468BC19E204030033E158 /* DifficultySelectorScene.m in Sources */,
 				7D3B31C119E495B800E6D815 /* Mole.m in Sources */,
 				7DF4688E19E1D0810033E158 /* MyScene.m in Sources */,
