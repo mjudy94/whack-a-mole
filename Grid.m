@@ -28,7 +28,6 @@ Mole *_moles[3][4];
 {
     NSMutableSet *set = [[NSMutableSet alloc] init];
     
-    NSLog(@"%ld", (long)rows);
     for (NSInteger row = 0; row < rows; row++)
     {
         for(NSInteger column = 0; column < 3; column++)
@@ -41,7 +40,6 @@ Mole *_moles[3][4];
             _moles[row][column] = mole;
             [set addObject:mole];
         }
-        NSLog(@"%lu", [set count]);
     }
     return set;
 }
