@@ -17,6 +17,6 @@
 @property (assign, nonatomic) NSString *name;
 @property (assign, nonatomic) SKSpriteNode *sprite;
 
-- (id)initAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum withSprite:(SKSpriteNode *)moleSprite;
+- (id)initAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum;
 
 @end
