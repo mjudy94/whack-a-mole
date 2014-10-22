@@ -17,13 +17,12 @@
 @synthesize name;
 @synthesize sprite;
 
-- (id)initAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum withSprite:(SKSpriteNode *)moleSprite
+- (id)initAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum
 {
     [self setColumn:colNum];
     [self setRow:rowNum];
     [self setIsVisible:false];
     [self setName:@"mole"];
-    [self setSprite:moleSprite];
     return self;
 }
 
