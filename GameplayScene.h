@@ -21,6 +21,11 @@ static const CGFloat HoleHeight = 0;
 @property (nonatomic, assign)NSInteger numColumns;
 @property (nonatomic, assign)NSInteger numRows;
 @property (nonatomic, assign)NSInteger userScore;
+@property (nonatomic, assign)SKLabelNode *userScoreNode;
+@property (nonatomic, assign)NSInteger currMoles;
+@property (nonatomic, assign)NSInteger maxMoles;
+@property (nonatomic, assign)NSInteger moleRate;
+
 @property (nonatomic, assign)BOOL gameOver;
 
 @property(strong, nonatomic) SKNode *bgLayer;
@@ -33,5 +38,6 @@ static const CGFloat HoleHeight = 0;
 
 -(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel;
 -(void)addSpritesForMoles;
-
+-(void)configureForGameMode:(NSInteger)mode andDifficulty:(NSInteger)difficulty;
+-(void)updateUserScore:(BOOL)moleHit;
 @end

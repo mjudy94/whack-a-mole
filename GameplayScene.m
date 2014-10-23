@@ -14,6 +14,7 @@
 @synthesize gameDifficulty;
 @synthesize grid;
 @synthesize userScore;
+@synthesize userScoreNode;
 @synthesize gameOver;
 
 SKAction *moleAnimation;//the mole animation action called in the touchesBegan method
@@ -36,6 +37,18 @@ SKSpriteNode *_mole;
         [self setGameDifficulty:difficultyLevel];
         [self setUserScore:0];
         
+        
+        NSLog (@"%li", self.userScore);
+        SKLabelNode *node = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
+        node.position = CGPointMake(0, self.frame.size.height *.4);
+        node.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
+        node.name = @"userScoreNode";
+        node.fontSize = 42;
+        node.zPosition = 4;
+        [self setUserScoreNode:node];
+        [self addChild:self.userScoreNode];
+        
+        
         self.anchorPoint = CGPointMake(0.5, 0.5);
         self.bgLayer = [SKNode node];
         [self addChild:self.bgLayer];
@@ -43,7 +56,6 @@ SKSpriteNode *_mole;
         [bg setScale:1.2];
         [bg setZPosition:0];
         [self.bgLayer addChild:bg];
-        
         
         //Initializes the atlas (collection of pictures)
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
@@ -70,6 +82,7 @@ SKSpriteNode *_mole;
         
         
         [self drawGameLayerForDifficultyLevel];
+        [self configureForGameMode:[self gameMode] andDifficulty:[self gameDifficulty]];
     }
     return self;
 }
@@ -88,10 +101,6 @@ SKSpriteNode *_mole;
     self.grid = [[Grid alloc] init];
     [self setMoles:[self.grid addInitialMolesWithRows:[self numRows]]];
     
-    SKLabelNode *userScoreNode = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
-    userScoreNode.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height *0.9);
-    userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
-    
     for (int i = 0; i < [self numRows]; i++)
     {
         SKSpriteNode *bgUpper = [SKSpriteNode spriteNodeWithImageNamed:@"bgUpper.png"];
@@ -109,12 +118,47 @@ SKSpriteNode *_mole;
     [self addSpritesForMoles];
 }
 
+-(void)configureForGameMode:(NSInteger)mode andDifficulty:(NSInteger)difficulty
+{
+    switch (gameDifficulty) {
+        case 0:
+            [self setMoleRate:150];
+            [self setMaxMoles:3];
+            break;
+            
+        case 1:
+            [self setMoleRate:140];
+            [self setMaxMoles:4];
+            break;
+            
+        case 2:
+            [self setMoleRate:120];
+            [self setMaxMoles:5];
+            break;
+            
+        default:
+            break;
+            
+    }
+    
+    switch (gameMode) {
+        case 0:
+            
+            break;
+            
+        case 1:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
+
 -(void)addSpritesForMoles
 {
-    NSLog(@"In add sprites for moles");
     for (Mole *mole in self.moles)
     {
-        NSLog(@"Adding a mole sprite");
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
         int moleOffset;
         if (mole.column % 3 == 0)
@@ -148,6 +192,19 @@ SKSpriteNode *_mole;
     return;
 }
 
+-(void)updateUserScore:(BOOL)moleHit
+{
+    if (moleHit)
+    {
+        [self setUserScore:[self userScore]+10];
+        self.userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
+    } else
+    {
+        [self setUserScore:[self userScore]-5];
+        self.userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
+    }
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //Called when a touch begins
     
@@ -161,7 +218,6 @@ SKSpriteNode *_mole;
         Mole *mole = [hitMole.userData objectForKey:@"mole"];
         if(mole.isVisible)
         {
-            NSLog(@"inside if statement for touchesBegan");
             mole.isVisible = false;
             SKAction *hideMole = [SKAction moveToY:hitMole.position.y-hitMole.size.height duration:0.2f];//
             hideMole.timingMode = SKActionTimingEaseInEaseOut;
@@ -169,8 +225,12 @@ SKSpriteNode *_mole;
             SKAction *sequence = [SKAction sequence:@[hideMole]];
             [hitMole runAction:sequence];
             NSLog(@"I'm hit! %ld %ld", (long)mole.row, (long)mole.column);
+            [self updateUserScore:true];
             [self runAction:[SKAction playSoundFileNamed:@"OUCH.mp3" waitForCompletion:NO]];
         }
+    } else
+    {
+        [self updateUserScore:false]; //decrements user score for hitting something that isn't a mole
     }
     
 }
@@ -180,7 +240,7 @@ SKSpriteNode *_mole;
     {
         for (int j = 0; j < [self numRows]; j++)
         {
-            if(arc4random() % 16 == 0)
+            if(arc4random() % [self moleRate] == 0)
             {
                 Mole *mole = [self.grid moleAtRow:i column:j];
                 SKSpriteNode *moleSprite = mole.sprite;
