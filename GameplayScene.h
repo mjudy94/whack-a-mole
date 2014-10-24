@@ -25,6 +25,7 @@ static const CGFloat HoleHeight = 0;
 @property (nonatomic, assign)NSInteger currMoles;
 @property (nonatomic, assign)NSInteger maxMoles;
 @property (nonatomic, assign)NSInteger moleRate;
+@property (nonatomic, assign)NSInteger moleTimeVisible;
 
 @property (nonatomic, assign)BOOL gameOver;
 
