@@ -124,16 +124,19 @@ SKSpriteNode *_mole;
         case 0:
             [self setMoleRate:150];
             [self setMaxMoles:3];
+            [self setMoleTimeVisible:2.25];
             break;
             
         case 1:
             [self setMoleRate:140];
             [self setMaxMoles:4];
+            [self setMoleTimeVisible:2];
             break;
             
         case 2:
             [self setMoleRate:120];
             [self setMaxMoles:5];
+            [self setMoleTimeVisible:1.8];
             break;
             
         default:
@@ -196,11 +199,11 @@ SKSpriteNode *_mole;
 {
     if (moleHit)
     {
-        [self setUserScore:[self userScore]+10];
+        self.userScore +=10;
         self.userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
     } else
     {
-        [self setUserScore:[self userScore]-5];
+        self.userScore -=5;
         self.userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
     }
 }
@@ -218,15 +221,10 @@ SKSpriteNode *_mole;
         Mole *mole = [hitMole.userData objectForKey:@"mole"];
         if(mole.isVisible)
         {
-            mole.isVisible = false;
-            SKAction *hideMole = [SKAction moveToY:hitMole.position.y-hitMole.size.height duration:0.2f];//
-            hideMole.timingMode = SKActionTimingEaseInEaseOut;
-            hideMole.speed = 0.5;
-            SKAction *sequence = [SKAction sequence:@[hideMole]];
-            [hitMole runAction:sequence];
-            NSLog(@"I'm hit! %ld %ld", (long)mole.row, (long)mole.column);
-            [self updateUserScore:true];
-            [self runAction:[SKAction playSoundFileNamed:@"OUCH.mp3" waitForCompletion:NO]];
+            [self moleHit:hitMole forMole:mole];
+        }
+        else{
+            [self updateUserScore:false];
         }
     } else
     {
@@ -234,7 +232,29 @@ SKSpriteNode *_mole;
     }
     
 }
+
+- (void)moleHit:(SKSpriteNode *)moleSprite forMole:(Mole *)mole
+{
+    [mole.sprite removeAllActions];
+    mole.isVisible = false;
+    SKAction *hideMole = [SKAction moveToY:mole.sprite.position.y-mole.sprite.size.height duration:0.2f];//
+    hideMole.timingMode = SKActionTimingEaseInEaseOut;
+    hideMole.speed = 0.5;
+    SKAction *sequence = [SKAction sequence:@[hideMole]];
+    [mole.sprite runAction:sequence];
+    
+    self.currMoles -= 1;
+    NSLog(@"I'm hit! %ld %ld", (long)mole.row, (long)mole.column);
+    [self updateUserScore:true];
+    [self runAction:[SKAction playSoundFileNamed:@"OUCH.mp3" waitForCompletion:NO]];
+}
+
 -(void)update:(CFTimeInterval)currentTime {
+    
+    if ([self currMoles] >= [self maxMoles])
+    {
+        return;
+    }
     
     for (int i = 0; i < [self numColumns]; i++)
     {
@@ -246,30 +266,34 @@ SKSpriteNode *_mole;
                 SKSpriteNode *moleSprite = mole.sprite;
                 if (!moleSprite.hasActions)
                 {
-                    [self popMole:moleSprite forMole:mole];
+                    if([self currMoles] < [self maxMoles])
+                    {
+                        [self popMole:moleSprite forMole:mole];
+                    }
                 }
             }
         }
     }
 }
 
-- (void)moleHit:(SKSpriteNode *)moleSprite forMole:(Mole *)mole
-{
-    
-}
-
 - (void)popMole:(SKSpriteNode *)moleSprite forMole:(Mole *)mole
 {
     SKAction *popUp = [SKAction moveToY:moleSprite.position.y + moleSprite.size.height duration:0.2f]; //pop the mole but do it over a span of .2 seconds
     popUp.timingMode = SKActionTimingEaseInEaseOut; //makes the animation smoother
-    SKAction *hideMole = [SKAction moveToY:moleSprite.position.y duration:0.2f];//
+    
+    SKAction *hideMole = [SKAction moveToY:moleSprite.position.y duration:0.2f];
     hideMole.timingMode = SKActionTimingEaseInEaseOut;
-    SKAction *pause = [SKAction waitForDuration:1.0f];
+    
+    SKAction *pause = [SKAction waitForDuration:[self moleTimeVisible]];
     SKAction *setIsVisibleTrue = [SKAction runBlock:^{
         [mole setIsVisible:true];
+        self.currMoles += 1;
+        NSLog(@"%li", (long)self.currMoles);
     }];
     SKAction *setIsVisibleFalse = [SKAction runBlock:^{
         [mole setIsVisible:false];
+        self.currMoles -= 1;
+        NSLog(@"%li", (long)self.currMoles);
     }];
     //Creates the sequence of actions to create mole antics where the mole pops up then goes back into his hole
     SKAction *moleAntics = [SKAction sequence:@[popUp, setIsVisibleTrue, pause, setIsVisibleFalse, hideMole]];
