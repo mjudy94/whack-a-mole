@@ -13,12 +13,6 @@
 
 @synthesize gameplayMode;
 
-+ (void)setGameplayMode:(NSInteger)gameplayMode
-{
-    self.gameplayMode = gameplayMode;
-}
-
-
 - (void)didMoveToView:(SKView *)view
 {
     if(!self.contentCreated)

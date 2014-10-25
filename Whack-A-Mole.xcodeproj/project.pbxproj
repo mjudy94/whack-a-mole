@@ -12,7 +12,6 @@
 		3EB2185219F20AE3006E7CAD /* bgUpper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EB2185119F20AE3006E7CAD /* bgUpper.png */; };
 		3EB2185419F21636006E7CAD /* bgColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EB2185319F21636006E7CAD /* bgColor.png */; };
 		7D3457AC19EECA160080FB8D /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3457AB19EECA160080FB8D /* GameOverScene.m */; };
-		7D3457AF19EED1E00080FB8D /* HighScoreScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3457AE19EED1E00080FB8D /* HighScoreScene.m */; };
 		7D3B31C119E495B800E6D815 /* Mole.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B31C019E495B800E6D815 /* Mole.m */; };
 		7D7B4C1819E37B3600C5E3AB /* GameplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */; };
 		7D82F16E19F094410022682C /* MoleAnimation.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 7D82F16C19F094410022682C /* MoleAnimation.atlas */; };
@@ -55,8 +54,6 @@
 		3EB2185319F21636006E7CAD /* bgColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgColor.png; sourceTree = "<group>"; };
 		7D3457AA19EECA160080FB8D /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		7D3457AB19EECA160080FB8D /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
-		7D3457AD19EED1E00080FB8D /* HighScoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreScene.h; sourceTree = "<group>"; };
-		7D3457AE19EED1E00080FB8D /* HighScoreScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreScene.m; sourceTree = "<group>"; };
 		7D3B31BF19E495B800E6D815 /* Mole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mole.h; sourceTree = "<group>"; };
 		7D3B31C019E495B800E6D815 /* Mole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mole.m; sourceTree = "<group>"; };
 		7D7B4C1619E37B3600C5E3AB /* GameplayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameplayScene.h; sourceTree = "<group>"; };
@@ -136,8 +133,6 @@
 				7D82F16D19F094410022682C /* OUCH.mp3 */,
 				7DF468AE19E1D1AB0033E158 /* MainMenuScene.h */,
 				7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */,
-				7D3457AD19EED1E00080FB8D /* HighScoreScene.h */,
-				7D3457AE19EED1E00080FB8D /* HighScoreScene.m */,
 				7D7B4C1619E37B3600C5E3AB /* GameplayScene.h */,
 				7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */,
 				7D3457AA19EECA160080FB8D /* GameOverScene.h */,
@@ -334,7 +329,6 @@
 				7DF4688B19E1D0810033E158 /* ViewController.m in Sources */,
 				7DF4688519E1D0810033E158 /* AppDelegate.m in Sources */,
 				7DF4688119E1D0810033E158 /* main.m in Sources */,
-				7D3457AF19EED1E00080FB8D /* HighScoreScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

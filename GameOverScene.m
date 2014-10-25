@@ -25,26 +25,28 @@
 
 - (void)drawGameOver
 {
+    
+    self.backgroundColor = [SKColor blueColor];
+    self.scaleMode = SKSceneScaleModeAspectFit;
+    
     //adding Game Over Label
     SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
-    gameOverLabel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
+    gameOverLabel.position = CGPointMake(0, self.frame.size.height * 0.4);
+    gameOverLabel.fontSize = 42;
     gameOverLabel.text = @"Game Over";
     [self addChild:gameOverLabel];
     
     //Displaying last user score
     SKLabelNode *score = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
-    score.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.75);
+    score.position = CGPointMake(0, self.frame.size.height * 0.25);
     score.text = [NSString stringWithFormat:@"%ld", (long)[self userScore]];
     [self addChild:score];
     
-    HighScoreScene *highScore = [[HighScoreScene alloc] initWithSize:CGSizeMake(self.frame.size.width, self.frame.size.height*.5)];
-    if (gameMode == 0)
-    {
-        [self addChild:[highScore drawClassicHighScore]];
-    } else if (gameMode == 1)
-    {
-        [self addChild:[highScore drawContinuousHighScore]];
-    }
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
 }
 
 
