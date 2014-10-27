@@ -35,10 +35,9 @@ SKSpriteNode *_mole;
     
     if (self = [super initWithSize:size]) {
         [self setGameDifficulty:difficultyLevel];
-        [self setUserScore:0];
+        self.userScore = 0;
         [self setGameBegun:false];
         
-        NSLog (@"%li", self.userScore);
         SKLabelNode *node = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
         node.position = CGPointMake(self.frame.size.width *-0.3, self.frame.size.height *.4);
         node.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
@@ -182,14 +181,6 @@ SKSpriteNode *_mole;
     }
 }
 
--(void)animateMole:(Mole *)mole
-{
-    //This is our general runAction method to make our mole animatiom.
-    [_mole runAction:[SKAction animateWithTextures:_moleFramesArray
-                                      timePerFrame:0.1f resize:YES restore:YES] withKey:@"walkingInPlaceBear"];
-    return;
-}
-
 -(void)updateUserScore:(BOOL)moleHit
 {
     if (moleHit)
@@ -293,15 +284,15 @@ SKSpriteNode *_mole;
     {
         self.startTime = currentTime;
         self.timeOfLastUpdate = currentTime;
-        self.countDown = 30;
+        self.countDown = 31;
         self.gameBegun = true;
     }
     
     //checks if the timer has reached 0, if so then call the gameOver method, else refresh the timer on screen
     if (self.countDown <= 0)
     {
-        [self gameOver];
         self.lengthOfGame = (currentTime - self.startTime);
+        [self gameOver];
         
     }
     else
@@ -372,13 +363,17 @@ SKSpriteNode *_mole;
 
 -(void)gameOver
 {
-    GameOverScene *gameOver = [[GameOverScene alloc] initWithSize:self.size];
-    [gameOver setGameMode:self.gameMode];
-    [gameOver setGameDifficulty:self.gameDifficulty];
-    [gameOver setUserScore:self.userScore];
-    [gameOver setLengthOfGame:self.lengthOfGame];
-    SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
-    [self.view presentScene:gameOver transition:doors];
+    SKAction *gameOverAction = [SKAction runBlock:^{
+        GameOverScene *gameOver = [[GameOverScene alloc] initWithSize:self.size];
+        [gameOver setGameMode:self.gameMode];
+        [gameOver setGameDifficulty:self.gameDifficulty];
+        [gameOver setUserScore:(int)self.userScore];
+        [gameOver setLengthOfGame:self.lengthOfGame];
+        SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
+        [self.view presentScene:gameOver transition:doors];
+    }];
+    [self runAction:gameOverAction];
+    
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MainMenuScene.h"
 #import "DifficultySelectorScene.h"
+#import "GameOverScene.h"
 
 @interface MainMenuScene ()
 

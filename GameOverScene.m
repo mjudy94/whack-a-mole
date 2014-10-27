@@ -18,29 +18,42 @@
 {
     if (!self.contentCreated)
     {
-        [self drawGameOver];
+        [self setupGameOver];
         self.contentCreated = YES;
     }
 }
 
-- (void)drawGameOver
+-(id)initWithSize:(CGSize)size
 {
+    if (self = [super initWithSize:size])
+    {
+        NSLog(@"In GameOver scene");
+        
+        self.backgroundColor = [SKColor blueColor];
+        self.scaleMode = SKSceneScaleModeAspectFit;
+        
+        [self setupGameOver];
+    }
     
-    self.backgroundColor = [SKColor blueColor];
-    self.scaleMode = SKSceneScaleModeAspectFit;
+    return self;
+}
+
+- (void)setupGameOver
+{
     
     //adding Game Over Label
     SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
-    gameOverLabel.position = CGPointMake(0, self.frame.size.height * 0.4);
+    gameOverLabel.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.95);
     gameOverLabel.fontSize = 42;
     gameOverLabel.text = @"Game Over";
     [self addChild:gameOverLabel];
     
     //Displaying last user score
     SKLabelNode *score = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
-    score.position = CGPointMake(0, self.frame.size.height * 0.25);
-    score.text = [NSString stringWithFormat:@"%ld", (long)[self userScore]];
+    score.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.85);
+    score.text = [NSString stringWithFormat:@"%d", (int)[self userScore]];
     [self addChild:score];
+    NSLog(@"%d", (int)[self userScore]);
     
 }
 

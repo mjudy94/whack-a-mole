@@ -24,7 +24,7 @@ static const CGFloat HoleHeight = 0;
 @property (nonatomic, assign)CFTimeInterval startTime;
 @property (nonatomic, assign)CFTimeInterval countDown;
 @property (nonatomic, assign)SKLabelNode *countDownNode;
-@property (nonatomic, assign)NSInteger userScore;
+@property (nonatomic, assign)int userScore;
 @property (nonatomic, assign)SKLabelNode *userScoreNode;
 @property (nonatomic, assign)NSInteger currMoles;
 @property (nonatomic, assign)NSInteger maxMoles;
