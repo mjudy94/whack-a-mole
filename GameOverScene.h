@@ -18,6 +18,6 @@
 @property (nonatomic, assign)CFTimeInterval lengthOfGame;
 @property BOOL contentCreated;
 
--(id)initWithSize:(CGSize)size;
+-(id)initWithSize:(CGSize)size withUserScore:(int)score withGameMode:(int)mode withDifficulty:(int)difficulty withGameLength:(CFTimeInterval)length;
 
 @end
