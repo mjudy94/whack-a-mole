@@ -18,10 +18,6 @@
 @synthesize countDown;
 @synthesize countDownNode;
 
-SKAction *moleAnimation;//the mole animation action called in the touchesBegan method
-NSArray *_moleFramesArray;//An array of textures to run the animation
-SKSpriteNode *_mole;
-
 - (void)didMoveToView:(SKView *)view
 {
     if (!self.contentCreated)
@@ -37,31 +33,7 @@ SKSpriteNode *_mole;
         self.userScore = 0;
         [self setGameBegun:false];
         
-        SKLabelNode *node = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
-        node.position = CGPointMake(self.frame.size.width *-0.3, self.frame.size.height *.4);
-        node.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
-        node.name = @"userScoreNode";
-        node.fontSize = 42;
-        node.zPosition = 4;
-        [self setUserScoreNode:node];
-        [self addChild:self.userScoreNode];
-        
-        SKLabelNode *gameTimer = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
-        gameTimer.position = CGPointMake(0, self.frame.size.height *.4);
-        gameTimer.name = @"gameTimerNode";
-        gameTimer.fontSize = 42;
-        gameTimer.zPosition = 4;
-        [self setCountDownNode:gameTimer];
-        [self addChild:self.countDownNode];
-        
-        
-        self.anchorPoint = CGPointMake(0.5, 0.5);
-        self.bgLayer = [SKNode node];
-        [self addChild:self.bgLayer];
-        SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"bgColor.png"];
-        [bg setScale:1.2];
-        [bg setZPosition:0];
-        [self.bgLayer addChild:bg];
+        [self setupHUD];
         
         //Initializes the atlas (collection of pictures)
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
@@ -91,6 +63,36 @@ SKSpriteNode *_mole;
         [self configureForGameDifficulty:[self gameDifficulty]];
     }
     return self;
+}
+
+//This method adds nodes to display the userScore, the gameTimer and also sets up the background image
+-(void)setupHUD
+{
+    SKLabelNode *scoreNode = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
+    scoreNode.position = CGPointMake(self.frame.size.width *-0.3, self.frame.size.height *.4);
+    scoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
+    scoreNode.name = @"userScoreNode";
+    scoreNode.fontSize = 42;
+    scoreNode.zPosition = 4;
+    [self setUserScoreNode:scoreNode];
+    [self addChild:self.userScoreNode];
+    
+    SKLabelNode *gameTimer = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
+    gameTimer.position = CGPointMake(0, self.frame.size.height *.4);
+    gameTimer.name = @"gameTimerNode";
+    gameTimer.fontSize = 42;
+    gameTimer.zPosition = 4;
+    [self setCountDownNode:gameTimer];
+    [self addChild:self.countDownNode];
+    
+    
+    self.anchorPoint = CGPointMake(0.5, 0.5);
+    self.bgLayer = [SKNode node];
+    [self addChild:self.bgLayer];
+    SKSpriteNode *bg = [SKSpriteNode spriteNodeWithImageNamed:@"bgColor.png"];
+    [bg setScale:1.2];
+    [bg setZPosition:0];
+    [self.bgLayer addChild:bg];
 }
 
 -(void)drawGameLayerForDifficultyLevel
