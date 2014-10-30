@@ -10,4 +10,20 @@
 
 @implementation Mole
 
+@synthesize column;
+@synthesize row;
+@synthesize isVisible;
+@synthesize duration;
+@synthesize name;
+@synthesize sprite;
+
+- (id)initAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum
+{
+    [self setColumn:colNum];
+    [self setRow:rowNum];
+    [self setIsVisible:false];
+    [self setName:@"mole"];
+    return self;
+}
+
 @end

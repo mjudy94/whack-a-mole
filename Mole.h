@@ -14,10 +14,9 @@
 @property (assign, nonatomic) NSInteger row;
 @property (assign, nonatomic) BOOL isVisible;
 @property (assign, nonatomic) NSTimeInterval duration; //length of time that mole will be present
+@property (assign, nonatomic) NSString *name;
 @property (assign, nonatomic) SKSpriteNode *sprite;
 
--(void)showMole;
--(void)hideMole;
-
+- (id)initAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum;
 
 @end

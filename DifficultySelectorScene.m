@@ -13,12 +13,6 @@
 
 @synthesize gameplayMode;
 
-+ (void)setGameplayMode:(NSInteger)gameplayMode
-{
-    self.gameplayMode = gameplayMode;
-}
-
-
 - (void)didMoveToView:(SKView *)view
 {
     if(!self.contentCreated)
@@ -32,9 +26,21 @@
 {
     self.backgroundColor = [SKColor blueColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
+    [self addChild:[self newMenuNode]];
     [self addChild:[self newEasyNode]];
     [self addChild:[self newMediumNode]];
     [self addChild:[self newHardNode]];
+}
+
+- (SKLabelNode *)newMenuNode
+{
+    //Add title label
+    SKLabelNode *menuNode = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
+    menuNode.name = @"menuNode";
+    menuNode.text = @"Whack-A-Mole";
+    menuNode.fontSize = 42;
+    menuNode.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.9);
+    return menuNode;
 }
 
 - (SKLabelNode *)newEasyNode
@@ -93,7 +99,8 @@
 
 - (void)setUpGameplay:(NSInteger)gameMode difficultyLevel:(NSInteger)difficultyLevel
 {
-    GameplayScene *gameScene = [[GameplayScene alloc] initWithSize:self.size];
+    NSLog(@"%ld", (long)difficultyLevel);
+    GameplayScene *gameScene = [[GameplayScene alloc] initWithSize:self.size withDifficultyLevel:difficultyLevel];
     SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
     [gameScene setGameMode:gameMode];
     [gameScene setGameDifficulty:difficultyLevel];
