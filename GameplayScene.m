@@ -15,7 +15,8 @@
 @synthesize grid;
 @synthesize userScore;
 @synthesize userScoreNode;
-@synthesize gameOver;
+@synthesize countDown;
+@synthesize countDownNode;
 
 SKAction *moleAnimation;//the mole animation action called in the touchesBegan method
 NSArray *_moleFramesArray;//An array of textures to run the animation
@@ -33,20 +34,26 @@ SKSpriteNode *_mole;
 -(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel {
     
     if (self = [super initWithSize:size]) {
-        [self setGameOver:false];
         [self setGameDifficulty:difficultyLevel];
-        [self setUserScore:0];
+        self.userScore = 0;
+        [self setGameBegun:false];
         
-        
-        NSLog (@"%li", self.userScore);
         SKLabelNode *node = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
-        node.position = CGPointMake(0, self.frame.size.height *.4);
+        node.position = CGPointMake(self.frame.size.width *-0.3, self.frame.size.height *.4);
         node.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
         node.name = @"userScoreNode";
         node.fontSize = 42;
         node.zPosition = 4;
         [self setUserScoreNode:node];
         [self addChild:self.userScoreNode];
+        
+        SKLabelNode *gameTimer = [[SKLabelNode alloc] initWithFontNamed:@"papyrus"];
+        gameTimer.position = CGPointMake(0, self.frame.size.height *.4);
+        gameTimer.name = @"gameTimerNode";
+        gameTimer.fontSize = 42;
+        gameTimer.zPosition = 4;
+        [self setCountDownNode:gameTimer];
+        [self addChild:self.countDownNode];
         
         
         self.anchorPoint = CGPointMake(0.5, 0.5);
@@ -82,7 +89,7 @@ SKSpriteNode *_mole;
         
         
         [self drawGameLayerForDifficultyLevel];
-        [self configureForGameMode:[self gameMode] andDifficulty:[self gameDifficulty]];
+        [self configureForGameDifficulty:[self gameDifficulty]];
     }
     return self;
 }
@@ -118,7 +125,7 @@ SKSpriteNode *_mole;
     [self addSpritesForMoles];
 }
 
--(void)configureForGameMode:(NSInteger)mode andDifficulty:(NSInteger)difficulty
+-(void)configureForGameDifficulty:(NSInteger)difficulty
 {
     switch (gameDifficulty) {
         case 0:
@@ -142,19 +149,6 @@ SKSpriteNode *_mole;
         default:
             break;
             
-    }
-    
-    switch (gameMode) {
-        case 0:
-            
-            break;
-            
-        case 1:
-            
-            break;
-            
-        default:
-            break;
     }
 }
 
@@ -187,14 +181,6 @@ SKSpriteNode *_mole;
     }
 }
 
--(void)animateMole:(Mole *)mole
-{
-    //This is our general runAction method to make our mole animatiom.
-    [_mole runAction:[SKAction animateWithTextures:_moleFramesArray
-                                      timePerFrame:0.1f resize:YES restore:YES] withKey:@"walkingInPlaceBear"];
-    return;
-}
-
 -(void)updateUserScore:(BOOL)moleHit
 {
     if (moleHit)
@@ -206,6 +192,29 @@ SKSpriteNode *_mole;
         self.userScore -=5;
         self.userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
     }
+    
+    //checks if the game mode is continuous mode, then calls the updateTimerForContinuousMode with a parameter that says whether or not a mole was hit
+    if (self.gameMode == 1)
+    {
+        [self updateTimerForContinuousMode:moleHit];
+    }
+}
+
+//if a mole was hit, increase the timer by 1, otherwise decrease it by 2
+-(void)updateTimerForContinuousMode:(BOOL)moleHit
+{
+    NSLog(@"Updating timer for continuous mode");
+    if (moleHit)
+    {
+        self.countDown +=1;
+        self.countDownNode.text = [NSString stringWithFormat:@"%i",(int)(self.countDown)];
+    }
+    else
+    {
+        self.countDown -=3;
+        self.countDownNode.text = [NSString stringWithFormat:@"%i", (int)(self.countDown)];
+    }
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -222,6 +231,7 @@ SKSpriteNode *_mole;
         if(mole.isVisible)
         {
             [self moleHit:hitMole forMole:mole];
+            [self updateUserScore:true];
         }
         else{
             [self updateUserScore:false];
@@ -245,17 +255,60 @@ SKSpriteNode *_mole;
     
     self.currMoles -= 1;
     NSLog(@"I'm hit! %ld %ld", (long)mole.row, (long)mole.column);
-    [self updateUserScore:true];
     [self runAction:[SKAction playSoundFileNamed:@"OUCH.mp3" waitForCompletion:NO]];
 }
 
+//assess penalty for a missed mole based on the game mode
+-(void)missedMolePenalty
+{
+    switch (self.gameMode) {
+        case 0:
+            self.userScore -= 5;
+            self.userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
+            break;
+        
+        case 1:
+            self.userScore -= 5;
+            self.userScoreNode.text = [NSString stringWithFormat:@"%li", (long)self.userScore];
+            self.countDown -= 2;
+            self.countDownNode.text = [NSString stringWithFormat:@"%i", (int)self.countDown];
+            
+        default:
+            break;
+    }
+}
+
 -(void)update:(CFTimeInterval)currentTime {
+    //checks if the game has started, if not, then initialize the start time to the value of current time to begin the timer count down
+    if (self.gameBegun == false)
+    {
+        self.startTime = currentTime;
+        self.timeOfLastUpdate = currentTime;
+        self.countDown = 31;
+        self.gameBegun = true;
+    }
     
-    if ([self currMoles] >= [self maxMoles])
+    //checks if the timer has reached 0, if so then call the gameOver method, else refresh the timer on screen
+    if (self.countDown <= 0)
+    {
+        self.lengthOfGame = (currentTime - self.startTime);
+        [self gameOver];
+        
+    }
+    else
+    {
+        self.countDown -= (currentTime - self.timeOfLastUpdate);
+        self.countDownNode.text = [NSString stringWithFormat:@"%i",(int)(self.countDown)];
+        self.timeOfLastUpdate = currentTime;
+    }
+    
+    //checks the time elapsed since the last mole pop. If it has been less than 0.15 seconds then return. This is to help mitigate the problem of too many moles popping at a time due to the screen refreshing too fast to accurately keep track of the number of popped moles
+    if (currentTime - self.lastMolePopTime < 0.15)
     {
         return;
     }
     
+    //iterate through each mole object, perform a mod operation on a random number to determine if the current mole should be popped. The mole rate that the mod operation uses is set in the configureForGameDifficulty method and controls the likelihood of a mole being popped.
     for (int i = 0; i < [self numColumns]; i++)
     {
         for (int j = 0; j < [self numRows]; j++)
@@ -264,11 +317,14 @@ SKSpriteNode *_mole;
             {
                 Mole *mole = [self.grid moleAtRow:i column:j];
                 SKSpriteNode *moleSprite = mole.sprite;
+                //check if the mole is currently popped or performing other actions
                 if (!moleSprite.hasActions)
                 {
+                    //check if the number of current moles is less than the max mole limit, if so then pop the mole
                     if([self currMoles] < [self maxMoles])
                     {
                         [self popMole:moleSprite forMole:mole];
+                        self.lastMolePopTime = currentTime;
                     }
                 }
             }
@@ -278,6 +334,10 @@ SKSpriteNode *_mole;
 
 - (void)popMole:(SKSpriteNode *)moleSprite forMole:(Mole *)mole
 {
+    if ([self currMoles] >= [self maxMoles])
+    {
+        return;
+    }
     SKAction *popUp = [SKAction moveToY:moleSprite.position.y + moleSprite.size.height duration:0.2f]; //pop the mole but do it over a span of .2 seconds
     popUp.timingMode = SKActionTimingEaseInEaseOut; //makes the animation smoother
     
@@ -288,16 +348,32 @@ SKSpriteNode *_mole;
     SKAction *setIsVisibleTrue = [SKAction runBlock:^{
         [mole setIsVisible:true];
         self.currMoles += 1;
-        NSLog(@"%li", (long)self.currMoles);
+        //NSLog(@"%li", (long)self.currMoles);
     }];
     SKAction *setIsVisibleFalse = [SKAction runBlock:^{
         [mole setIsVisible:false];
         self.currMoles -= 1;
-        NSLog(@"%li", (long)self.currMoles);
+        [self missedMolePenalty];
+        //NSLog(@"%li", (long)self.currMoles);
     }];
     //Creates the sequence of actions to create mole antics where the mole pops up then goes back into his hole
     SKAction *moleAntics = [SKAction sequence:@[popUp, setIsVisibleTrue, pause, setIsVisibleFalse, hideMole]];
     [moleSprite runAction:moleAntics];
+}
+
+-(void)gameOver
+{
+    SKAction *gameOverAction = [SKAction runBlock:^{
+        GameOverScene *gameOver = [[GameOverScene alloc] initWithSize:self.size];
+        [gameOver setGameMode:self.gameMode];
+        [gameOver setGameDifficulty:self.gameDifficulty];
+        [gameOver setUserScore:(int)self.userScore];
+        [gameOver setLengthOfGame:self.lengthOfGame];
+        SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
+        [self.view presentScene:gameOver transition:doors];
+    }];
+    [self runAction:gameOverAction];
+    
 }
 
 @end
