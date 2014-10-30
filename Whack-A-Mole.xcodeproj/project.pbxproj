@@ -11,6 +11,7 @@
 		3EB2185019F20427006E7CAD /* bgtopStrip.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EB2184F19F20427006E7CAD /* bgtopStrip.png */; };
 		3EB2185219F20AE3006E7CAD /* bgUpper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EB2185119F20AE3006E7CAD /* bgUpper.png */; };
 		3EB2185419F21636006E7CAD /* bgColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EB2185319F21636006E7CAD /* bgColor.png */; };
+		7D02DB081A0281FE0065047B /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D02DB071A0281FE0065047B /* GameData.m */; };
 		7D3457AC19EECA160080FB8D /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3457AB19EECA160080FB8D /* GameOverScene.m */; };
 		7D3B31C119E495B800E6D815 /* Mole.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D3B31C019E495B800E6D815 /* Mole.m */; };
 		7D7B4C1819E37B3600C5E3AB /* GameplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */; };
@@ -52,6 +53,8 @@
 		3EB2184F19F20427006E7CAD /* bgtopStrip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgtopStrip.png; sourceTree = "<group>"; };
 		3EB2185119F20AE3006E7CAD /* bgUpper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgUpper.png; sourceTree = "<group>"; };
 		3EB2185319F21636006E7CAD /* bgColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgColor.png; sourceTree = "<group>"; };
+		7D02DB061A0281FE0065047B /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
+		7D02DB071A0281FE0065047B /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
 		7D3457AA19EECA160080FB8D /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		7D3457AB19EECA160080FB8D /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		7D3B31BF19E495B800E6D815 /* Mole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mole.h; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */,
 				7D7B4C1619E37B3600C5E3AB /* GameplayScene.h */,
 				7D7B4C1719E37B3600C5E3AB /* GameplayScene.m */,
+				7D02DB061A0281FE0065047B /* GameData.h */,
+				7D02DB071A0281FE0065047B /* GameData.m */,
 				7D3457AA19EECA160080FB8D /* GameOverScene.h */,
 				7D3457AB19EECA160080FB8D /* GameOverScene.m */,
 				7DF468BA19E204030033E158 /* DifficultySelectorScene.h */,
@@ -325,6 +330,7 @@
 				7DF468BC19E204030033E158 /* DifficultySelectorScene.m in Sources */,
 				7D3B31C119E495B800E6D815 /* Mole.m in Sources */,
 				7DF4688E19E1D0810033E158 /* MyScene.m in Sources */,
+				7D02DB081A0281FE0065047B /* GameData.m in Sources */,
 				7DF468B019E1D1AB0033E158 /* MainMenuScene.m in Sources */,
 				7DF4688B19E1D0810033E158 /* ViewController.m in Sources */,
 				7DF4688519E1D0810033E158 /* AppDelegate.m in Sources */,
