@@ -30,7 +30,6 @@ SKSpriteNode *_mole;
     }
 }
 
-//I basically run most of the code from here but Im going to to devide the code into different methods
 -(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel {
     
     if (self = [super initWithSize:size]) {
@@ -364,11 +363,7 @@ SKSpriteNode *_mole;
 -(void)gameOver
 {
     SKAction *gameOverAction = [SKAction runBlock:^{
-        GameOverScene *gameOver = [[GameOverScene alloc] initWithSize:self.size];
-        [gameOver setGameMode:self.gameMode];
-        [gameOver setGameDifficulty:self.gameDifficulty];
-        [gameOver setUserScore:(int)self.userScore];
-        [gameOver setLengthOfGame:self.lengthOfGame];
+        GameOverScene *gameOver = [[GameOverScene alloc] initWithSize:self.size withUserScore:self.userScore withGameMode:(int)[self gameMode] withDifficulty:(int)[self gameDifficulty] withGameLength:[self lengthOfGame]];
         SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
         [self.view presentScene:gameOver transition:doors];
     }];
