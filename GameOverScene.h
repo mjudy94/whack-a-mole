@@ -12,6 +12,9 @@
 
 @interface GameOverScene : SKScene
 
+@property (assign, nonatomic)int totalMolesHit;
+@property (assign, nonatomic)NSMutableArray *highScores;
+
 @property (nonatomic, assign)NSInteger gameMode; //Classic Mode: 0, Continuous Mode: 1
 @property (nonatomic, assign)NSInteger gameDifficulty; //Easy: 0, Medium: 1, Hard: 2
 @property (nonatomic, assign)NSInteger userScore;
