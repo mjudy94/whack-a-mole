@@ -22,5 +22,5 @@
 @property BOOL contentCreated;
 
 -(id)initWithSize:(CGSize)size withUserScore:(int)score withGameMode:(int)mode withDifficulty:(int)difficulty withGameLength:(CFTimeInterval)length;
-
+-(void)updateHighScores:(NSString *)highScores;
 @end

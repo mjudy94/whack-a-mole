@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GameData : NSObject
+@interface GameData : NSObject <NSCoding>
 
 @property (assign, nonatomic)int userScore;
 @property (assign, nonatomic)CFTimeInterval lengthOfGame;
@@ -16,9 +16,9 @@
 @property (assign, nonatomic)int gameDifficulty;
 @property (assign, nonatomic)int molesHit;
 
-
+@property (assign, nonatomic)NSMutableArray *highScores;
 
 +(instancetype)sharedGameData;
 -(void)reset;
-
+-(void)save;
 @end
