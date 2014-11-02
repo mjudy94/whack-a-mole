@@ -42,7 +42,7 @@ static NSString* const SSGameDataTotalDistanceKey = @"totalDistance";
 {
     static NSString* filePath = nil;
     if (!filePath) {
-        filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"gamedata"];
+        filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"six"];
     }
     return filePath;
 }

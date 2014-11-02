@@ -123,16 +123,19 @@
 -(void)updateHighScores:(NSString *)arrayKey
 {
     //NSMutableArray *highScores = [GameData sharedGameData].highScores;
-    NSLog(@"%@", [GameData sharedGameData].highScores);
-    NSMutableArray *highScores = [[NSMutableArray alloc] initWithArray:[GameData sharedGameData].highScores];
+    _highScores = self.highScores;
+    if(self.highScores == nil)
+    {
+        _highScores = [[NSMutableArray alloc] initWithArray:[GameData sharedGameData].highScores];
+    }
     
     @try{
         for (int i = 0; i < 5; i++)
         {
-            if(self.userScore > (int)[highScores objectAtIndex:i])
+            if(self.userScore > (int)[_highScores objectAtIndex:i])
             {
-                [highScores insertObject:[NSNumber numberWithInt:(int)self.userScore    ] atIndex:i];
-                [highScores removeLastObject];
+                [_highScores insertObject:[NSNumber numberWithInt:(int)self.userScore    ] atIndex:i];
+                [_highScores removeLastObject];
                 break;
             }
         }
@@ -140,22 +143,22 @@
     @catch (NSException *exception)
     {
         NSLog(@"Caught an exception!");
-        highScores = [[NSMutableArray alloc] initWithObjects:@0, @0, @0, @0, @0, nil];
+        _highScores = nil;
+        _highScores = [[NSMutableArray alloc] initWithObjects:@0, @0, @0, @0, @0, nil];
         for (int i = 0; i < 5; i++)
         {
-            if(self.userScore > (int)[highScores objectAtIndex:i])
+            if(self.userScore > (int)[self.highScores objectAtIndex:i])
             {
-                [highScores insertObject:[NSNumber numberWithInt:(int)self.userScore    ] atIndex:i];
-                [highScores removeLastObject];
+                [_highScores insertObject:[NSNumber numberWithInt:(int)self.userScore    ] atIndex:i];
+                [_highScores removeLastObject];
                 break;
             }
         }
     }
     @finally
     {
-        [self setHighScores:highScores];
-        [GameData sharedGameData].highScores = highScores;
-        [[GameData sharedGameData] save];
+        [self setHighScores:_highScores];
+        [GameData sharedGameData].highScores = _highScores;
         
         SKLabelNode *highScoreDisplay = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
         highScoreDisplay.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.8);
