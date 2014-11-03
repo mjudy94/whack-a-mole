@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "GameData.h"
+#import "GameDataStore.h"
 
 @implementation AppDelegate
 
@@ -28,7 +28,15 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    [[GameData sharedGameData] save];
+    BOOL success = [[GameDataStore sharedStore] saveChanges];
+    if (success)
+    {
+        NSLog(@"Saved all high scores");
+    }
+    else{
+        NSLog(@"Could not save high scores");
+    }
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

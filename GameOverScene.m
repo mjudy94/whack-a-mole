@@ -7,7 +7,7 @@
 //
 
 #import "GameOverScene.h"
-#import "GameData.h"
+#import "GameDataStore.h"
 
 @implementation GameOverScene
 
@@ -81,20 +81,24 @@
         case 0:
             if (self.gameMode == 0)
             {
+                self.highScores = [[GameDataStore sharedStore].allItems objectAtIndex:0];
                 [self updateHighScores:@"easyClassicHighScores"];
             }
             else if (self.gameMode == 1)
             {
+                self.highScores = [[GameDataStore sharedStore].allItems objectAtIndex:1];
                 [self updateHighScores:@"easyContinuousHighScores"];
             }
             break;
         case 1:
             if (self.gameMode == 0)
             {
+                self.highScores = [[GameDataStore sharedStore].allItems objectAtIndex:2];
                 [self updateHighScores:@"mediumClassicHighScores"];
             }
             else if (self.gameMode == 1)
             {
+                self.highScores = [[GameDataStore sharedStore].allItems objectAtIndex:3];
                 [self updateHighScores:@"mediumContinuousHighScores"];
             }
             break;
@@ -102,10 +106,12 @@
         case 2:
             if (self.gameMode == 0)
             {
+                self.highScores = [[GameDataStore sharedStore].allItems objectAtIndex:4];
                 [self updateHighScores:@"easyClassicHighScores"];
             }
             else if (self.gameMode == 1)
             {
+                self.highScores = [[GameDataStore sharedStore].allItems objectAtIndex:5];
                 [self updateHighScores:@"easyContinuousHighScores"];
             }
             break;

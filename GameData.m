@@ -2,66 +2,40 @@
 
 @implementation GameData
 
-static NSString* const SSGameDataHighScoreKey = @"highScore";
-static NSString* const SSGameDataTotalDistanceKey = @"totalDistance";
+-(id)initWithName:(NSString *)dataName
+{
+    self.name = dataName;
+    self.highScores = [[NSMutableArray alloc] initWithObjects:@0, @0, @0, @0, @0, nil];
+    
+    return self;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:self.highScores forKey: SSGameDataHighScoreKey];
-    //[encoder encodeDouble:self.totalDistance forKey: SSGameDataTotalDistanceKey];
+    [encoder encodeObject:self.easyClassicHighScores forKey:@"easyClassic"];
+    [encoder encodeObject:self.easyContinuousHighScores forKey:@"easyContinuous"];
+    
+    [encoder encodeObject:self.mediumClassicHighScores forKey:@"mediumClassic"];
+    [encoder encodeObject:self.mediumContinuousHighScores forKey:@"mediumContinuous"];
+    
+    [encoder encodeObject:self.hardClassicHighScores forKey:@"hardClassic"];
+    [encoder encodeObject:self.hardContinuousHighScores forKey:@"hardContinous"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder
 {
     self = [self init];
     if (self) {
-        _highScores = [decoder decodeObjectForKey: SSGameDataHighScoreKey];
-        //_totalDistance = [decoder decodeDoubleForKey: SSGameDataTotalDistanceKey];
+        _easyClassicHighScores = [decoder decodeObjectForKey: @"easyClassic"];
+        _easyContinuousHighScores = [decoder decodeObjectForKey:@"easyContinuous"];
         
+        _mediumClassicHighScores = [decoder decodeObjectForKey:@"mediumClassic"];
+        _mediumContinuousHighScores = [decoder decodeObjectForKey:@"mediumContinuous"];
+        
+        _hardClassicHighScores = [decoder decodeObjectForKey:@"hardClassic"];
+        _hardContinuousHighScores = [decoder decodeObjectForKey:@"hardContinuous"];
     }
     return self;
-}
-
-+ (instancetype)sharedGameData {
-    static id sharedInstance = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [self loadInstance];
-    });
-    
-    return sharedInstance;
-}
-
--(void)reset
-{
-    
-}
-
-+(NSString*)filePath
-{
-    static NSString* filePath = nil;
-    if (!filePath) {
-        filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"six"];
-    }
-    return filePath;
-}
-
-+(instancetype)loadInstance
-{
-    NSData* decodedData = [NSData dataWithContentsOfFile: [GameData filePath]];
-    if (decodedData) {
-        GameData* gameData = [NSKeyedUnarchiver unarchiveObjectWithData:decodedData];
-        return gameData;
-    }
-    
-    return [[GameData alloc] init];
-}
-
--(void)save
-{
-    NSData* encodedData = [NSKeyedArchiver archivedDataWithRootObject: self];
-    [encodedData writeToFile:[GameData filePath] atomically:YES];
 }
 
 @end
