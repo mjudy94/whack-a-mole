@@ -21,7 +21,6 @@
 {
     static GameDataStore *sharedStore;
     
-    // Do I need to create a sharedStore?
     if (!sharedStore) {
         sharedStore = [[self alloc] initPrivate];
     }
@@ -67,7 +66,7 @@
     return [NSKeyedArchiver archiveRootObject:self.highScores toFile:path];
 }
 
-- (NSArray *)allItems
+- (NSMutableArray *)allItems
 {
     return [self.highScores copy];
 }

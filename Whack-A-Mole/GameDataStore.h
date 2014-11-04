@@ -12,6 +12,6 @@
 
 +(instancetype)sharedStore;
 -(BOOL)saveChanges;
--(NSArray *)allItems;
+-(NSMutableArray *)allItems;
 
 @end

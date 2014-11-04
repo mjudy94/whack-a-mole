@@ -5,7 +5,12 @@
 -(id)initWithName:(NSString *)dataName
 {
     self.name = dataName;
-    self.highScores = [[NSMutableArray alloc] initWithObjects:@0, @0, @0, @0, @0, nil];
+    self.highScores = [[NSMutableArray alloc] initWithCapacity:5];
+    NSInteger zero = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        [self.highScores addObject:[NSNumber numberWithInteger:zero]];
+    }
     
     return self;
 }
