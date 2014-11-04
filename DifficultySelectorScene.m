@@ -26,7 +26,10 @@
 {
     self.backgroundColor = [SKColor blueColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
+    
     [self addChild:[self newMenuNode]];
+    
+    //Add nodes to function as difficulty level selectors
     [self addChild:[self newEasyNode]];
     [self addChild:[self newMediumNode]];
     [self addChild:[self newHardNode]];
@@ -97,6 +100,7 @@
     
 }
 
+//set up the gamePlay scene for the desired gameMode and difficulty level
 - (void)setUpGameplay:(NSInteger)gameMode difficultyLevel:(NSInteger)difficultyLevel
 {
     NSLog(@"%ld", (long)difficultyLevel);

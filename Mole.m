@@ -17,6 +17,7 @@
 @synthesize name;
 @synthesize sprite;
 
+//create a mole object at the desired column and row
 - (id)initAtColumn:(NSInteger)colNum atRow:(NSInteger)rowNum
 {
     [self setColumn:colNum];

@@ -19,6 +19,7 @@ Mole *_moles[3][4];
     return self;
 }
 
+//add moles to the grid
 -(NSSet *)addInitialMolesWithRows:(NSInteger)rows
 {
     NSMutableSet *set = [[NSMutableSet alloc] init];
@@ -36,6 +37,7 @@ Mole *_moles[3][4];
     return set;
 }
 
+//return the mole object at the specified index
 - (Mole *)moleAtRow:(NSInteger)rowNum column:(NSInteger)colNum
 {
     return _moles[rowNum][colNum];
