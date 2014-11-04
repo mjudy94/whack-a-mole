@@ -31,7 +31,7 @@
 
 - (void)updateHighScore:(NSMutableArray *)updatedScores forIndex:(int)index
 {
-    GameData *scores = [[GameData alloc] init];
+    GameData *scores = [[GameData alloc] initWithScores:updatedScores];
     [self.highScores setObject:scores atIndexedSubscript:index];
 }
 

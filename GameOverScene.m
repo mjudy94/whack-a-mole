@@ -40,7 +40,6 @@
         [self setLengthOfGame:length];
         
         [self setupGameOver];
-        [self addReturnToMainMenuNode];
         [self retrieveHighScoresForGame];
     }
     
@@ -63,16 +62,13 @@
     score.text = [NSString stringWithFormat:@"%d", (int)[self userScore]];
     [self addChild:score];
     
-}
-
--(void)addReturnToMainMenuNode
-{
     SKLabelNode *mainMenuNode = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
     mainMenuNode.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.15);
     mainMenuNode.fontSize = 36;
     mainMenuNode.name = @"mainMenu";
     mainMenuNode.text = @"Return to Main Menu";
     [self addChild:mainMenuNode];
+    
 }
 
 -(void)retrieveHighScoresForGame
@@ -126,6 +122,12 @@
         default:
             break;
     }
+    BOOL saved = [[GameDataStore sharedStore] saveChanges];
+    if(saved)
+    {
+        NSLog(@"It saved!!!");
+    }
+    
 }
 
 -(void)updateHighScores:(NSString *)arrayKey
@@ -133,11 +135,6 @@
     for (int i = 0; i < 5; i++)
     {
         NSNumber *newVal = [NSNumber numberWithInt:(int)self.userScore];
-        if (!self.highScores)
-        {
-            NSLog(@"high scores = nil");
-            [self.highScores insertObject:newVal atIndex:0];
-        }
         if(self.userScore > [[self.highScores objectAtIndex:i] intValue])
         {
             //NSLog(@"user score is greater than a high score");
@@ -180,9 +177,6 @@
     highScore5.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.35);
     highScore5.text = [NSString stringWithFormat:@"%d", [[self.highScores objectAtIndex:4] intValue]];
     [self addChild:highScore5];
-    //NSLog(@"%@", [GameData sharedGameData].highScores);
-    //NSLog(@"%@", [[GameData sharedGameData].highScores objectAtIndex:0]);
-    //NSLog(@"%@", [self highScores]);
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
