@@ -36,30 +36,13 @@
         [self setupHUD];
         
         //Initializes the atlas (collection of pictures)
+        //Need to add logic here for camera if new picture is to be inserted
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
         self.moleTexture = [moleAnimatedAtlas textureNamed:@"mole_1.png"];
-        //makes temp array to hold the textures from the atlas
-        NSMutableArray *moleFrames = [NSMutableArray array];
-        //makes the pictures from the atlas into texture objects
-        SKTexture *frame1 = [moleAnimatedAtlas textureNamed:@"mole_1"];
-        SKTexture *frame2 = [moleAnimatedAtlas textureNamed:@"mole_thump1"];
-        SKTexture *frame3 = [moleAnimatedAtlas textureNamed:@"mole_thump2"];
-        SKTexture *frame4 = [moleAnimatedAtlas textureNamed:@"mole_thump3"];
-        SKTexture *frame5 = [moleAnimatedAtlas textureNamed:@"mole_thump4"];
-        //adds the textures to the moleFrame array in order to pass to the static NSArray
-        [moleFrames addObject:frame1];
-        [moleFrames addObject:frame2];
-        [moleFrames addObject:frame3];
-        [moleFrames addObject:frame4];
-        [moleFrames addObject:frame5];
-        //Made a temp texture so the mole node starts off with the first picture in the array
-        //SKTexture *temp = _moleFramesArray[0];
-        //_mole = [SKSpriteNode spriteNodeWithTexture:temp];
-        //position of the mole, will change once we add more
-        //_mole.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         
-        
-        [self drawGameLayerForDifficultyLevel];
+        //draw game
+        [self drawGameLayer];
+        //configure game logic
         [self configureForGameDifficulty:[self gameDifficulty]];
     }
     return self;
@@ -95,7 +78,8 @@
     [self.bgLayer addChild:bg];
 }
 
--(void)drawGameLayerForDifficultyLevel
+//initializes an instance of Grid of size dependent on the difficulty level which contains mole objects.
+-(void)drawGameLayer
 {
     [self setNumColumns:3];
     if (self.gameDifficulty == 0)
@@ -109,6 +93,7 @@
     self.grid = [[Grid alloc] init];
     [self setMoles:[self.grid addInitialMolesWithRows:[self numRows]]];
     
+    //initialize the upper and lower half of the holes and place them in the right location
     for (int i = 0; i < [self numRows]; i++)
     {
         SKSpriteNode *bgUpper = [SKSpriteNode spriteNodeWithImageNamed:@"bgUpper.png"];
@@ -126,6 +111,7 @@
     [self addSpritesForMoles];
 }
 
+//configures the moleRate, maxMoles, and moleTimeVisible variables based on the gameDifficulty
 -(void)configureForGameDifficulty:(NSInteger)difficulty
 {
     switch (gameDifficulty) {
@@ -153,6 +139,7 @@
     }
 }
 
+//Add a sprite to each mole object and set each sprites location
 -(void)addSpritesForMoles
 {
     for (Mole *mole in self.moles)
@@ -182,6 +169,7 @@
     }
 }
 
+//Updates the score based on whether or not the user tapped a visible mole, then checks if the game mode is "Continuous". If it is, then it also increments the timer by 1 or decreases it by 3 based on whether or not a mole was hit
 -(void)updateUserScore:(BOOL)moleHit
 {
     if (moleHit)
@@ -201,10 +189,9 @@
     }
 }
 
-//if a mole was hit, increase the timer by 1, otherwise decrease it by 2
+//if a mole was hit, increase the timer by 1, otherwise decrease it by 3
 -(void)updateTimerForContinuousMode:(BOOL)moleHit
 {
-    NSLog(@"Updating timer for continuous mode");
     if (moleHit)
     {
         self.countDown +=1;
@@ -218,6 +205,7 @@
     
 }
 
+//Checks if a mole object was tapped then calls methods to update scores based on this
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //Called when a touch begins
     
@@ -231,10 +219,13 @@
         Mole *mole = [hitMole.userData objectForKey:@"mole"];
         if(mole.isVisible)
         {
+            //calls a method that will cause the mole to be hidden
             [self moleHit:hitMole forMole:mole];
+            //increment the user score
             [self updateUserScore:true];
         }
         else{
+            //decrement the user score
             [self updateUserScore:false];
         }
     } else
@@ -244,6 +235,7 @@
     
 }
 
+//trigger hideMole animation and play the OUCH noise for the mole that was hit
 - (void)moleHit:(SKSpriteNode *)moleSprite forMole:(Mole *)mole
 {
     [mole.sprite removeAllActions];
@@ -333,6 +325,7 @@
     }
 }
 
+//Pops a random mole
 - (void)popMole:(SKSpriteNode *)moleSprite forMole:(Mole *)mole
 {
     if ([self currMoles] >= [self maxMoles])
@@ -349,19 +342,18 @@
     SKAction *setIsVisibleTrue = [SKAction runBlock:^{
         [mole setIsVisible:true];
         self.currMoles += 1;
-        //NSLog(@"%li", (long)self.currMoles);
     }];
     SKAction *setIsVisibleFalse = [SKAction runBlock:^{
         [mole setIsVisible:false];
         self.currMoles -= 1;
         [self missedMolePenalty];
-        //NSLog(@"%li", (long)self.currMoles);
     }];
     //Creates the sequence of actions to create mole antics where the mole pops up then goes back into his hole
     SKAction *moleAntics = [SKAction sequence:@[popUp, setIsVisibleTrue, pause, setIsVisibleFalse, hideMole]];
     [moleSprite runAction:moleAntics];
 }
 
+//initialize a gameOver scene then transition to it
 -(void)gameOver
 {
     SKAction *gameOverAction = [SKAction runBlock:^{

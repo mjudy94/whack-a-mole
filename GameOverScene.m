@@ -26,6 +26,7 @@
     }
 }
 
+//initialize the GameOverScene and set it's instance variables
 -(id)initWithSize:(CGSize)size withUserScore:(int)score withGameMode:(int)mode withDifficulty:(int)difficulty withGameLength:(CFTimeInterval)length
 {
     if (self = [super initWithSize:size])
@@ -33,12 +34,13 @@
         self.backgroundColor = [SKColor blueColor];
         self.scaleMode = SKSceneScaleModeAspectFit;
         
-        
+        //set instance varaibles
         [self setUserScore:score];
         [self setGameMode:mode];
         [self setGameDifficulty:difficulty];
         [self setLengthOfGame:length];
         
+        //set up the data to be displayed
         [self setupGameOver];
         [self retrieveHighScoresForGame];
     }
@@ -48,7 +50,6 @@
 
 - (void)setupGameOver
 {
-    
     //adding Game Over Label
     SKLabelNode *gameOverLabel = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
     gameOverLabel.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.95);
@@ -56,12 +57,20 @@
     gameOverLabel.text = @"Game Over";
     [self addChild:gameOverLabel];
     
+    //add a label to say "Score: "
+    SKLabelNode *userScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
+    gameOverLabel.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.9);
+    gameOverLabel.fontSize = 42;
+    gameOverLabel.text = @"Score: ";
+    [self addChild:userScoreLabel];
+    
     //Displaying last user score
     SKLabelNode *score = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
     score.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.85);
     score.text = [NSString stringWithFormat:@"%d", (int)[self userScore]];
     [self addChild:score];
     
+    //Add a label node that will return the user to the main menu scene
     SKLabelNode *mainMenuNode = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
     mainMenuNode.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 0.15);
     mainMenuNode.fontSize = 36;
@@ -73,6 +82,7 @@
 
 -(void)retrieveHighScoresForGame
 {
+    //retrieve the appropriate highScores array from sharedStore then update the array based on the current userScore
     NSMutableArray *allHighScores = [GameDataStore sharedStore].allItems;
     switch (self.gameDifficulty) {
         case 0:
@@ -122,6 +132,8 @@
         default:
             break;
     }
+    
+    //Save the updated sharedStore
     BOOL saved = [[GameDataStore sharedStore] saveChanges];
     if(saved)
     {
@@ -130,6 +142,7 @@
     
 }
 
+//update the highScores array with the current user score then display the top 5 high scores below the userScore
 -(void)updateHighScores:(NSString *)arrayKey
 {
     for (int i = 0; i < 5; i++)
@@ -178,6 +191,7 @@
     highScore5.text = [NSString stringWithFormat:@"%d", [[self.highScores objectAtIndex:4] intValue]];
     [self addChild:highScore5];
 }
+
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {

@@ -17,6 +17,7 @@
 
 @implementation GameDataStore
 
+// a public instance of GameDataStore for GameOverScene to access
 + (instancetype)sharedStore
 {
     static GameDataStore *sharedStore;
@@ -29,12 +30,14 @@
     return sharedStore;
 }
 
+//update the highScores array for a GameData object in GameDataStore
 - (void)updateHighScore:(NSMutableArray *)updatedScores forIndex:(int)index
 {
     GameData *scores = [[GameData alloc] initWithScores:updatedScores];
     [self.highScores setObject:scores atIndexedSubscript:index];
 }
 
+//initialize a GameDataStore object
 - (instancetype)initPrivate
 {
     self = [super init];
@@ -46,12 +49,12 @@
         if(!_highScores)
         {
             NSLog(@"initializing all high scores");
-            GameData *easyClassic = [[GameData alloc] initWithName:@"easyClassic"];
-            GameData *easyContinuous = [[GameData alloc] initWithName:@"easyContinuous"];
-            GameData *mediumClassic = [[GameData alloc] initWithName:@"mediumClassic"];
-            GameData *mediumContinuous = [[GameData alloc] initWithName:@"mediumContinuous"];
-            GameData *hardClassic = [[GameData alloc] initWithName:@"hardClassic"];
-            GameData *hardContinuous = [[GameData alloc] initWithName:@"hardContinuous"];
+            GameData *easyClassic = [[GameData alloc] init];
+            GameData *easyContinuous = [[GameData alloc] init];
+            GameData *mediumClassic = [[GameData alloc] init];
+            GameData *mediumContinuous = [[GameData alloc] init];
+            GameData *hardClassic = [[GameData alloc] init];
+            GameData *hardContinuous = [[GameData alloc] init];
             
             self.highScores = [[NSMutableArray alloc]initWithObjects:easyClassic, easyContinuous, mediumClassic, mediumContinuous, hardClassic, hardContinuous, nil];
         }
@@ -60,6 +63,7 @@
     return self;
 }
 
+//retrieve the archive location of the GameDataStore object
 - (NSString *)itemArchivePath
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -67,6 +71,7 @@
     return [documentDirectory stringByAppendingPathComponent:@"highScores.archive"];
 }
 
+//save the GameDataStore object at the specified path
 - (BOOL)saveChanges
 {
     NSString *path = [self itemArchivePath];
@@ -74,6 +79,7 @@
     return [NSKeyedArchiver archiveRootObject:self.highScores toFile:path];
 }
 
+//return a copy of the highScores array of GameData highScores
 - (NSMutableArray *)allItems
 {
     return [self.highScores copy];

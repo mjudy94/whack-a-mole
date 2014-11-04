@@ -13,7 +13,7 @@
 @property (assign ,nonatomic)NSString *name;
 @property (nonatomic)NSMutableArray *highScores;
 
--(id)initWithName:(NSString *)dataName;
+-(id)init;
 -(id)initWithScores:(NSMutableArray *)scores;
 
 @end
