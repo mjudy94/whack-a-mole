@@ -13,5 +13,6 @@
 +(instancetype)sharedStore;
 -(BOOL)saveChanges;
 -(NSMutableArray *)allItems;
-
+- (NSString *)itemArchivePath;
+- (void)updateHighScore:(NSMutableArray *)updatedScores forIndex:(int)index;
 @end

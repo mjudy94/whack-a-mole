@@ -22,10 +22,17 @@
     static GameDataStore *sharedStore;
     
     if (!sharedStore) {
+        NSLog(@"initializing sharedStore");
         sharedStore = [[self alloc] initPrivate];
     }
     
     return sharedStore;
+}
+
+- (void)updateHighScore:(NSMutableArray *)updatedScores forIndex:(int)index
+{
+    GameData *scores = [[GameData alloc] init];
+    [self.highScores setObject:scores atIndexedSubscript:index];
 }
 
 - (instancetype)initPrivate
@@ -35,9 +42,10 @@
     {
         NSString *path = [self itemArchivePath];
         _highScores = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-        
+        NSLog(@"%@", _highScores);
         if(!_highScores)
         {
+            NSLog(@"initializing all high scores");
             GameData *easyClassic = [[GameData alloc] initWithName:@"easyClassic"];
             GameData *easyContinuous = [[GameData alloc] initWithName:@"easyContinuous"];
             GameData *mediumClassic = [[GameData alloc] initWithName:@"mediumClassic"];
