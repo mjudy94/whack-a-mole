@@ -10,31 +10,31 @@
 	<string>Whack-A-Mole</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>C330425C-D235-4827-BA8F-F44261D38C20</key>
+		<key>14B5AF263AA97993B86FC898FD2F2F4B732767BC</key>
 		<string>https://github.com/mjudy94/whack-a-mole.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Whack-A-Mole.xcodeproj/project.xcworkspace</string>
+	<string>Whack-A-Mole.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>C330425C-D235-4827-BA8F-F44261D38C20</key>
+		<key>14B5AF263AA97993B86FC898FD2F2F4B732767BC</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/mjudy94/whack-a-mole.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>C330425C-D235-4827-BA8F-F44261D38C20</string>
+	<string>14B5AF263AA97993B86FC898FD2F2F4B732767BC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C330425C-D235-4827-BA8F-F44261D38C20</string>
+			<string>14B5AF263AA97993B86FC898FD2F2F4B732767BC</string>
 			<key>IDESourceControlWCCName</key>
-			<string>develop_mj</string>
+			<string>develop_ds</string>
 		</dict>
 	</array>
 </dict>

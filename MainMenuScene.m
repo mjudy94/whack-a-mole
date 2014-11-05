@@ -9,6 +9,7 @@
 #import "MainMenuScene.h"
 #import "DifficultySelectorScene.h"
 #import "GameOverScene.h"
+#import "ViewController.h"
 
 @interface MainMenuScene ()
 
@@ -45,6 +46,7 @@
 
 - (void)createMainMenu
 {
+    [self runAction:[SKAction playSoundFileNamed:@"GOT.mp3" waitForCompletion:NO]];
     //adding classic mode button
     SKLabelNode *classicButton = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
     classicButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.4);
@@ -58,6 +60,13 @@
     continuousButton.name = @"continuousButton";
     continuousButton.text = @"Continuous";
     [self addChild:continuousButton];
+    
+    //adding continuous mode button
+    SKLabelNode *cameraButton = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
+    cameraButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.2);
+    cameraButton.name = @"cameraButton";
+    cameraButton.text = @"Camera!";
+    [self addChild:cameraButton];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -76,6 +85,10 @@
         //go to chooseDifficulty scene, passs a 1 as the parameter for game mode
         [self chooseDifficultyScene:1];
     }
+    if([node.name isEqualToString:@"cameraButton"]){
+        [(ViewController *)self.view.window.rootViewController switchToCamera];
+        //[(ViewController *)self.view.window.rootViewController switchToCamera];
+    }
     
 }
 
@@ -84,6 +97,7 @@
 {
     DifficultySelectorScene *difficultySelectorScene = [[DifficultySelectorScene alloc] initWithSize:self.size];
     SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
+    [difficultySelectorScene setMolePicture:self.molePicture];
     [difficultySelectorScene setGameplayMode:mode];
     [self.view presentScene:difficultySelectorScene transition:doors];
 }

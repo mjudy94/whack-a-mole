@@ -11,4 +11,9 @@
 
 @interface ViewController : UIViewController
 
+-(void)switchToCamera;
+-(void)setImage:(UIImage *) picture;
+-(UIImage*)getImage;
+@property (strong, nonatomic) UIImage *molePicture;
+
 @end

@@ -1,4 +1,3 @@
-//
 //  MainMenuScene.h
 //  Whack-A-Mole
 //
@@ -7,9 +6,14 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "CameraViewController.h"
 
-@interface MainMenuScene : SKScene
+@interface MainMenuScene : SKScene <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (weak, nonatomic) id <SKSceneDelegate> delegate;
+@property (nonatomic) UIImage *molePicture;
+@end
 
-
+@protocol sceneDelegate <NSObject>
+-(void)showShareScreen;
 @end

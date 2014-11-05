@@ -106,6 +106,7 @@
     NSLog(@"%ld", (long)difficultyLevel);
     GameplayScene *gameScene = [[GameplayScene alloc] initWithSize:self.size withDifficultyLevel:difficultyLevel];
     SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
+    [gameScene setMolePicture:self.molePicture];
     [gameScene setGameMode:gameMode];
     [gameScene setGameDifficulty:difficultyLevel];
     [self.view presentScene:gameScene transition:doors];

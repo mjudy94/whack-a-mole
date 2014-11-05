@@ -10,6 +10,7 @@
 #import "Mole.h"
 #import "Grid.h"
 #import "GameOverScene.h"
+#import "ViewController.h"
 
 @interface GameplayScene : SKScene
 
@@ -39,6 +40,9 @@
 @property (strong, nonatomic) SKTexture *moleTexture;
 @property (strong, nonatomic) NSSet *moles;
 @property (strong, nonatomic) Grid *grid;
+
+@property (nonatomic, assign)UIImage* molePicture;
+
 
 @property BOOL contentCreated;
 

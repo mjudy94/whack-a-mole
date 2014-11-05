@@ -1,31 +1,60 @@
 //
 //  ViewController.m
-//  WAMProto
+//  Whack-A-Mole
 //
-//  Created by Dan Saganome on 10/14/14.
-//  Copyright (c) 2014 Dan Saganome. All rights reserved.
+//  Created by Matthew Judy on 10/5/14.
+//  Copyright (c) 2014 __MyCompanyName__. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
+#import "CameraViewController.h"
+#import "MainMenuScene.h"
+#import <SpriteKit/Spritekit.h>
+#import "AppDelegate.h"
+
 
 @implementation ViewController
 
-- (void)viewDidLoad
+- (void)viewWillLayoutSubviews
 {
-    [super viewDidLoad];
+    [super viewWillLayoutSubviews];
+    //[self.navigationController pushViewController:_detailViewController animated:YES];
+    
+}
+-(void)switchToCamera{
+    NSLog(@"SwitchView");
+    CameraViewController *camView = [[CameraViewController alloc] initWithNibName:(@"CameraViewController") bundle:nil];
+    [self presentViewController:camView animated:YES completion:nil];
+}
 
-    // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+-(void)setImage:(UIImage *) picture{
+
+    _molePicture = picture;
+}
+
+-(UIImage*)getImage{
+    if( _molePicture == NULL)
+        NSLog(@"pic is nuLLLLLLL");
+    return _molePicture;
+}
+
+
+- (void)viewDidLoad {
+    // UIImagePickerControllerOriginalImage *imagePicker = [[UIImagePickerController alloc] init];
+    NSLog(@"Hello");
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
     
-    // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"Hello");
     
-    // Present the scene.
-    [skView presentScene:scene];
+    MainMenuScene* main = [[MainMenuScene alloc] initWithSize:CGSizeMake(768, 1024)];
+    SKView *spriteView = (SKView *) self.view;
+    [spriteView presentScene: main];
+    
 }
 
 - (BOOL)shouldAutorotate

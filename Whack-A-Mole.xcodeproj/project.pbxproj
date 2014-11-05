@@ -27,7 +27,6 @@
 		7DF4688119E1D0810033E158 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4688019E1D0810033E158 /* main.m */; };
 		7DF4688519E1D0810033E158 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4688419E1D0810033E158 /* AppDelegate.m */; };
 		7DF4688819E1D0810033E158 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4688619E1D0810033E158 /* Main.storyboard */; };
-		7DF4688B19E1D0810033E158 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4688A19E1D0810033E158 /* ViewController.m */; };
 		7DF4688E19E1D0810033E158 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4688D19E1D0810033E158 /* MyScene.m */; };
 		7DF4689219E1D0810033E158 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4689119E1D0810033E158 /* Images.xcassets */; };
 		7DF4689919E1D0810033E158 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF4689819E1D0810033E158 /* XCTest.framework */; };
@@ -37,6 +36,11 @@
 		7DF468A519E1D0810033E158 /* Whack_A_MoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF468A419E1D0810033E158 /* Whack_A_MoleTests.m */; };
 		7DF468B019E1D1AB0033E158 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */; };
 		7DF468BC19E204030033E158 /* DifficultySelectorScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF468BB19E204030033E158 /* DifficultySelectorScene.m */; };
+		C5A4C6E11A0AD4FE000E86C8 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5A4C6DF1A0AD4FE000E86C8 /* CameraViewController.m */; };
+		C5A4C6E21A0AD4FE000E86C8 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5A4C6E01A0AD4FE000E86C8 /* CameraViewController.xib */; };
+		C5A4C6E51A0ADAB2000E86C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5A4C6E41A0ADAB2000E86C8 /* ViewController.m */; };
+		C5A4C6E81A0ADB40000E86C8 /* GOT.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C5A4C6E61A0ADB40000E86C8 /* GOT.mp3 */; };
+		C5A4C6E91A0ADB40000E86C8 /* laugh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C5A4C6E71A0ADB40000E86C8 /* laugh.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +84,6 @@
 		7DF4688319E1D0810033E158 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7DF4688419E1D0810033E158 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7DF4688719E1D0810033E158 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7DF4688919E1D0810033E158 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7DF4688A19E1D0810033E158 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7DF4688C19E1D0810033E158 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
 		7DF4688D19E1D0810033E158 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
 		7DF4689119E1D0810033E158 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -94,6 +96,13 @@
 		7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuScene.m; path = ../MainMenuScene.m; sourceTree = "<group>"; };
 		7DF468BA19E204030033E158 /* DifficultySelectorScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DifficultySelectorScene.h; path = ../DifficultySelectorScene.h; sourceTree = "<group>"; };
 		7DF468BB19E204030033E158 /* DifficultySelectorScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DifficultySelectorScene.m; path = ../DifficultySelectorScene.m; sourceTree = "<group>"; };
+		C5A4C6DE1A0AD4FE000E86C8 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraViewController.h; path = ../CameraViewController.h; sourceTree = "<group>"; };
+		C5A4C6DF1A0AD4FE000E86C8 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CameraViewController.m; path = ../CameraViewController.m; sourceTree = "<group>"; };
+		C5A4C6E01A0AD4FE000E86C8 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CameraViewController.xib; path = ../CameraViewController.xib; sourceTree = "<group>"; };
+		C5A4C6E31A0ADAB2000E86C8 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = SOURCE_ROOT; };
+		C5A4C6E41A0ADAB2000E86C8 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = SOURCE_ROOT; };
+		C5A4C6E61A0ADB40000E86C8 /* GOT.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = GOT.mp3; path = ../GOT.mp3; sourceTree = "<group>"; };
+		C5A4C6E71A0ADB40000E86C8 /* laugh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = laugh.mp3; path = ../laugh.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +146,8 @@
 				3EB2184D19F20422006E7CAD /* bgLower.png */,
 				7D82F16C19F094410022682C /* MoleAnimation.atlas */,
 				7D82F16D19F094410022682C /* OUCH.mp3 */,
+				C5A4C6E61A0ADB40000E86C8 /* GOT.mp3 */,
+				C5A4C6E71A0ADB40000E86C8 /* laugh.mp3 */,
 				7DF4687A19E1D0810033E158 /* Whack-A-Mole */,
 				7DF4689E19E1D0810033E158 /* Whack-A-MoleTests */,
 				7DF4687119E1D0810033E158 /* Frameworks */,
@@ -169,6 +180,9 @@
 			isa = PBXGroup;
 			children = (
 				7D82F17219F095A10022682C /* iPad */,
+				C5A4C6DE1A0AD4FE000E86C8 /* CameraViewController.h */,
+				C5A4C6DF1A0AD4FE000E86C8 /* CameraViewController.m */,
+				C5A4C6E01A0AD4FE000E86C8 /* CameraViewController.xib */,
 				7DF468AE19E1D1AB0033E158 /* MainMenuScene.h */,
 				7DF468AF19E1D1AB0033E158 /* MainMenuScene.m */,
 				7D7B4C1619E37B3600C5E3AB /* GameplayScene.h */,
@@ -187,9 +201,9 @@
 				7D872B2E19F475A80060D2BE /* Grid.m */,
 				7DF4688319E1D0810033E158 /* AppDelegate.h */,
 				7DF4688419E1D0810033E158 /* AppDelegate.m */,
+				C5A4C6E31A0ADAB2000E86C8 /* ViewController.h */,
+				C5A4C6E41A0ADAB2000E86C8 /* ViewController.m */,
 				7DF4688619E1D0810033E158 /* Main.storyboard */,
-				7DF4688919E1D0810033E158 /* ViewController.h */,
-				7DF4688A19E1D0810033E158 /* ViewController.m */,
 				7DF4688C19E1D0810033E158 /* MyScene.h */,
 				7DF4688D19E1D0810033E158 /* MyScene.m */,
 				7DF4689119E1D0810033E158 /* Images.xcassets */,
@@ -310,7 +324,10 @@
 				7DF4688819E1D0810033E158 /* Main.storyboard in Resources */,
 				3EB2185419F21636006E7CAD /* bgColor.png in Resources */,
 				7D82F16E19F094410022682C /* MoleAnimation.atlas in Resources */,
+				C5A4C6E91A0ADB40000E86C8 /* laugh.mp3 in Resources */,
 				3EB2185219F20AE3006E7CAD /* bgUpper.png in Resources */,
+				C5A4C6E81A0ADB40000E86C8 /* GOT.mp3 in Resources */,
+				C5A4C6E21A0AD4FE000E86C8 /* CameraViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,9 +352,10 @@
 				7DF468BC19E204030033E158 /* DifficultySelectorScene.m in Sources */,
 				7D3B31C119E495B800E6D815 /* Mole.m in Sources */,
 				7DF4688E19E1D0810033E158 /* MyScene.m in Sources */,
+				C5A4C6E51A0ADAB2000E86C8 /* ViewController.m in Sources */,
 				7D02DB081A0281FE0065047B /* GameData.m in Sources */,
 				7DF468B019E1D1AB0033E158 /* MainMenuScene.m in Sources */,
-				7DF4688B19E1D0810033E158 /* ViewController.m in Sources */,
+				C5A4C6E11A0AD4FE000E86C8 /* CameraViewController.m in Sources */,
 				7DF4688519E1D0810033E158 /* AppDelegate.m in Sources */,
 				7DF4688119E1D0810033E158 /* main.m in Sources */,
 				7D3092641A07D15000D4F023 /* GameDataStore.m in Sources */,
@@ -471,7 +489,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -487,7 +505,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

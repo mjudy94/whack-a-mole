@@ -35,16 +35,30 @@
         
         [self setupHUD];
         
+        //setting image from camera
+        //_molePicture = [(ViewController *)self.view.window.rootViewController getImage];
+        
         //Initializes the atlas (collection of pictures)
         //Need to add logic here for camera if new picture is to be inserted
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
-        self.moleTexture = [moleAnimatedAtlas textureNamed:@"mole_1.png"];
-        
+        if( self.molePicture == NULL){
+            NSLog(@"game not initialized with a picture");
+
+            self.moleTexture = [moleAnimatedAtlas textureNamed:@"mole_1.png"];
+
+        }
+        else{
+            NSLog(@"game initialized with a picture");
+            self.moleTexture = [SKTexture textureWithImage:self.molePicture];
+        }
+    
         //draw game
         [self drawGameLayer];
         //configure game logic
         [self configureForGameDifficulty:[self gameDifficulty]];
     }
+
+
     return self;
 }
 
@@ -332,6 +346,7 @@
     {
         return;
     }
+    [self runAction:[SKAction playSoundFileNamed:@"laugh.mp3" waitForCompletion:NO]];
     SKAction *popUp = [SKAction moveToY:moleSprite.position.y + moleSprite.size.height duration:0.2f]; //pop the mole but do it over a span of .2 seconds
     popUp.timingMode = SKActionTimingEaseInEaseOut; //makes the animation smoother
     
