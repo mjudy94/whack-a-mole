@@ -68,10 +68,12 @@
     SKNode *node = [self nodeAtPoint:touchLocation];
     
     if([node.name isEqualToString:@"classicButton"]){
+        //go to chooseDifficulty scene, passs a 0 as the parameter for game mode
         [self chooseDifficultyScene:0];
     }
     
     if([node.name isEqualToString:@"continuousButton"]){
+        //go to chooseDifficulty scene, passs a 1 as the parameter for game mode
         [self chooseDifficultyScene:1];
     }
     

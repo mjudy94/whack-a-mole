@@ -11,27 +11,27 @@
 #import "Grid.h"
 #import "GameOverScene.h"
 
-static const CGFloat HoleWidth = 0;
-static const CGFloat HoleHeight = 0;
-
 @interface GameplayScene : SKScene
 
 @property (nonatomic, assign)NSInteger gameMode; //Classic Mode: 0, Continuous Mode: 1
 @property (nonatomic, assign)NSInteger gameDifficulty; //Easy: 0, Medium: 1, Hard: 2
-@property (nonatomic, assign)NSInteger numColumns;
-@property (nonatomic, assign)NSInteger numRows;
-@property (nonatomic, assign)CFTimeInterval lastMolePopTime;
-@property (nonatomic, assign)CFTimeInterval startTime;
+@property (nonatomic, assign)NSInteger numColumns; //always 3
+@property (nonatomic, assign)NSInteger numRows; //3 rows if easy, else 4 rows
+
+@property (nonatomic, assign)CFTimeInterval lastMolePopTime; //used to keep track of mole popping frequency and to help cut down on moles popping too frequently
+@property (nonatomic, assign)CFTimeInterval startTime; //for timer
 @property (nonatomic, assign)CFTimeInterval countDown;
+@property (nonatomic, assign)CFTimeInterval timeOfLastUpdate;
+@property (nonatomic, assign)CFTimeInterval lengthOfGame;
 @property (nonatomic, assign)SKLabelNode *countDownNode;
+
 @property (nonatomic, assign)int userScore;
 @property (nonatomic, assign)SKLabelNode *userScoreNode;
 @property (nonatomic, assign)NSInteger currMoles;
 @property (nonatomic, assign)NSInteger maxMoles;
 @property (nonatomic, assign)NSInteger moleRate;
-@property (nonatomic, assign)NSInteger moleTimeVisible;
-@property (nonatomic, assign)CFTimeInterval timeOfLastUpdate;
-@property (nonatomic, assign)CFTimeInterval lengthOfGame;
+@property (nonatomic, assign)NSInteger moleTimeVisible; //dependent on game difficulty
+
 
 @property (nonatomic, assign)BOOL gameBegun;
 

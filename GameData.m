@@ -1,35 +1,42 @@
-//
-//  GameData.m
-//  Whack-A-Mole
-//
-//  Created by Matthew Judy on 10/30/14.
-//
-//
-
 #import "GameData.h"
 
 @implementation GameData
 
-+(instancetype)sharedGameData
+
+//initialize a GameData object with a high score array of 5 0's
+-(id)init
 {
-    static id sharedInstance = nil;
+    self.highScores = [[NSMutableArray alloc] initWithCapacity:5];
+    NSInteger zero = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        [self.highScores addObject:[NSNumber numberWithInteger:zero]];
+    }
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[self alloc] init];
-    });
-    
-    
-    return sharedInstance;
+    return self;
 }
 
--(void)reset
+//initialize a GameData object with a high score array
+-(id)initWithScores:(NSMutableArray *)scores
 {
-    self.userScore = 0;
-    self.gameDifficulty = -1;
-    self.gameMode = -1;
-    self.lengthOfGame = 0;
-    self.molesHit = 0;
+    self.highScores = scores;
+    return self;
+}
+
+//encode the highScores array for the GameData object
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.highScores forKey:@"highScores"];
+}
+
+//decode the highscores array for the GameData object
+- (instancetype)initWithCoder:(NSCoder *)decoder
+{
+    self = [self init];
+    if (self) {
+       _highScores = [decoder decodeObjectForKey: @"highScores"];
+    }
+    return self;
 }
 
 @end
