@@ -104,9 +104,11 @@
 - (void)setUpGameplay:(NSInteger)gameMode difficultyLevel:(NSInteger)difficultyLevel
 {
     NSLog(@"%ld", (long)difficultyLevel);
-    GameplayScene *gameScene = [[GameplayScene alloc] initWithSize:self.size withDifficultyLevel:difficultyLevel];
+    UIImage *temp = [(ViewController *)self.view.window.rootViewController getImage];
+
+    GameplayScene *gameScene = [[GameplayScene alloc] initWithSize:self.size withDifficultyLevel:difficultyLevel withPicture:temp];
     SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.25];
-    [gameScene setMolePicture:self.molePicture];
+    //[gameScene setMolePicture:self.molePicture];
     [gameScene setGameMode:gameMode];
     [gameScene setGameDifficulty:difficultyLevel];
     [self.view presentScene:gameScene transition:doors];

@@ -17,7 +17,8 @@
 @synthesize userScoreNode;
 @synthesize countDown;
 @synthesize countDownNode;
-
+NSArray *_moleThumpFramesArray;//An array of textures to run the animation
+NSArray *_moleLaughFramesArray;//An array of textures to run the animation
 - (void)didMoveToView:(SKView *)view
 {
     if (!self.contentCreated)
@@ -26,7 +27,7 @@
     }
 }
 
--(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel {
+-(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel withPicture:(UIImage*)pictureParameter {
     
     if (self = [super initWithSize:size]) {
         [self setGameDifficulty:difficultyLevel];
@@ -35,21 +36,50 @@
         
         [self setupHUD];
         
-        //setting image from camera
-        //_molePicture = [(ViewController *)self.view.window.rootViewController getImage];
         
+        self.molePicture = pictureParameter;
         //Initializes the atlas (collection of pictures)
-        //Need to add logic here for camera if new picture is to be inserted
         SKTextureAtlas *moleAnimatedAtlas = [SKTextureAtlas atlasNamed:@"MoleAnimation"];
+        self.moleTexture = [moleAnimatedAtlas textureNamed:@"mole_1.png"];
+        //makes temp array to hold the textures from the atlas
+        NSMutableArray *moleThumpFrames = [NSMutableArray array];
+        NSMutableArray *moleLaughFrames = [NSMutableArray array];
+        //makes the pictures from the atlas into texture objects
+        SKTexture *frame1 = [moleAnimatedAtlas textureNamed:@"mole_1"];
+        SKTexture *frame2 = [moleAnimatedAtlas textureNamed:@"mole_thump1"];
+        SKTexture *frame3 = [moleAnimatedAtlas textureNamed:@"mole_thump2"];
+        SKTexture *frame4 = [moleAnimatedAtlas textureNamed:@"mole_thump3"];
+        SKTexture *frame5 = [moleAnimatedAtlas textureNamed:@"mole_thump4"];
+        
+        SKTexture *frame6 = [moleAnimatedAtlas textureNamed:@"mole_laugh1"];
+        SKTexture *frame7 = [moleAnimatedAtlas textureNamed:@"mole_laugh2"];
+        SKTexture *frame8 = [moleAnimatedAtlas textureNamed:@"mole_laugh3"];
+        //adds the textures to the moleFrame array in order to pass to the static NSArray
+        [moleThumpFrames addObject:frame1];
+        [moleThumpFrames addObject:frame2];
+        [moleThumpFrames addObject:frame3];
+        [moleThumpFrames addObject:frame4];
+        [moleThumpFrames addObject:frame5];
+        
+        [moleLaughFrames addObject:frame6];
+        [moleLaughFrames addObject:frame7];
+        [moleLaughFrames addObject:frame8];
+        
+        //Made a temp texture so the mole node starts off with the first picture in the array
+        _moleThumpFramesArray = moleThumpFrames;
+        _moleLaughFramesArray = moleLaughFrames;
+        
+        
         if( self.molePicture == NULL){
             NSLog(@"game not initialized with a picture");
-
+            self.usedCamImage = FALSE;
             self.moleTexture = [moleAnimatedAtlas textureNamed:@"mole_1.png"];
 
         }
         else{
             NSLog(@"game initialized with a picture");
-            self.moleTexture = [SKTexture textureWithImage:self.molePicture];
+            self.usedCamImage = TRUE;
+            self.moleTexture = [SKTexture textureWithImage:self.molePicture ];
         }
     
         //draw game
@@ -159,6 +189,10 @@
     for (Mole *mole in self.moles)
     {
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:self.moleTexture];
+        if(self.usedCamImage){
+            [sprite setScale:.06];
+        }
+            
         int moleOffset;
         if (mole.column % 3 == 0)
         {
@@ -255,6 +289,8 @@
     [mole.sprite removeAllActions];
     mole.isVisible = false;
     SKAction *hideMole = [SKAction moveToY:mole.sprite.position.y-mole.sprite.size.height duration:0.2f];//
+    mole.sprite.color = [SKColor redColor];
+    mole.sprite.colorBlendFactor = .5;
     hideMole.timingMode = SKActionTimingEaseInEaseOut;
     hideMole.speed = 0.5;
     SKAction *sequence = [SKAction sequence:@[hideMole]];
@@ -263,6 +299,11 @@
     self.currMoles -= 1;
     NSLog(@"I'm hit! %ld %ld", (long)mole.row, (long)mole.column);
     [self runAction:[SKAction playSoundFileNamed:@"OUCH.mp3" waitForCompletion:NO]];
+    if(!_usedCamImage){
+        [mole.sprite runAction:[SKAction animateWithTextures:_moleThumpFramesArray
+                                                timePerFrame:0.3f resize:YES restore:YES] withKey:@"MoleThumps"];
+    }
+
 }
 
 //assess penalty for a missed mole based on the game mode
@@ -342,6 +383,7 @@
 //Pops a random mole
 - (void)popMole:(SKSpriteNode *)moleSprite forMole:(Mole *)mole
 {
+    mole.sprite.colorBlendFactor = 0;
     if ([self currMoles] >= [self maxMoles])
     {
         return;
@@ -366,6 +408,10 @@
     //Creates the sequence of actions to create mole antics where the mole pops up then goes back into his hole
     SKAction *moleAntics = [SKAction sequence:@[popUp, setIsVisibleTrue, pause, setIsVisibleFalse, hideMole]];
     [moleSprite runAction:moleAntics];
+    if(!_usedCamImage){
+        [mole.sprite runAction:[SKAction animateWithTextures:_moleLaughFramesArray
+                                                timePerFrame:0.3f resize:YES restore:YES] withKey:@"MoleThumps"];
+    }
 }
 
 //initialize a gameOver scene then transition to it

@@ -20,9 +20,6 @@
     
     [(ViewController *)self.view.window.rootViewController setImage:(_ImageView.image)];
     [self dismissViewControllerAnimated:YES completion:NULL];
-   // MainMenuScene* mainMenu = [[MainMenuScene alloc] initWithSize:CGSizeMake(768, 1024)];
-   // mainMenu.molePicture = _ImageView.image;
-   // [self.view presentScene: mainMenu];
 
 }
 - (IBAction)takePhoto:(UIButton *)sender {

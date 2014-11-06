@@ -42,12 +42,13 @@
 @property (strong, nonatomic) Grid *grid;
 
 @property (nonatomic, assign)UIImage* molePicture;
+@property BOOL usedCamImage;
 
 
 @property BOOL contentCreated;
 
 
--(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel;
+-(id)initWithSize:(CGSize)size withDifficultyLevel:(NSInteger)difficultyLevel withPicture:(UIImage*)pictureParameter;
 -(void)addSpritesForMoles;
 -(void)configureForGameDifficulty:(NSInteger)difficulty;
 -(void)updateUserScore:(BOOL)moleHit;

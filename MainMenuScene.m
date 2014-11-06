@@ -47,6 +47,7 @@
 - (void)createMainMenu
 {
     [self runAction:[SKAction playSoundFileNamed:@"GOT.mp3" waitForCompletion:NO]];
+    
     //adding classic mode button
     SKLabelNode *classicButton = [SKLabelNode labelNodeWithFontNamed:@"Papyrus"];
     classicButton.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.4);
